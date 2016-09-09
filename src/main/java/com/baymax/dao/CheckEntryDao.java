@@ -23,6 +23,6 @@ public interface CheckEntryDao extends CrudRepository<CheckEntry,Long> {
      * @param parentId
      * @return
      */
-    @Query(value = "select en from tb_check_entry en where en.parent_id=?1",nativeQuery = true)
+    @Query(value = "select en.* from tb_check_entry en where en.parent_id=?1",nativeQuery = true)
     List<CheckEntry> sqlFindAllByParentId(Long parentId);
 }

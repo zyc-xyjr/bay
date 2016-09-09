@@ -25,7 +25,7 @@ public class CheckEntryDaoTest {
     private CheckEntryDao checkEntryDao;
     @Test
     public void testFindAllByParentId() throws Exception {
-        List<CheckEntry> checkEntryList = checkEntryDao.findAllBySqlParentId(0l);
+        List<CheckEntry> checkEntryList = checkEntryDao.sqlFindAllByParentId(0l);
         System.out.println("+++++++=");
     }
 }
