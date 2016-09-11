@@ -22,6 +22,9 @@ public class CheckEntryItem extends IncrementEntity {
     @Column(name = "item_key")
     private String itemKey;
 
+    @Column(name = "item_section")
+    private String itemSection;
+
     @Transient
     private List<Sickness> sicknessList;
 
@@ -55,5 +58,21 @@ public class CheckEntryItem extends IncrementEntity {
 
     public void setSicknessList(List<Sickness> sicknessList) {
         this.sicknessList = sicknessList;
+    }
+
+    public long getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(long entryId) {
+        this.entryId = entryId;
+    }
+
+    public String getItemSection() {
+        return itemSection;
+    }
+
+    public void setItemSection(String itemSection) {
+        this.itemSection = itemSection;
     }
 }

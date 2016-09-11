@@ -2,10 +2,18 @@ package com.bm.service;
 
 import com.bm.entity.CheckEntry;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/8.
  */
 public interface CheckEntryService {
 
     void saveCheckEntry(CheckEntry checkEntry);
+
+    List<CheckEntry> findAllCheckEntry();
+
+    List<CheckEntry> findEntriesByParentId(long parentId);
+
+    void removeCheckEntry(long id);
 }

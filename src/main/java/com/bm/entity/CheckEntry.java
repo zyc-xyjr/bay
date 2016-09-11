@@ -24,6 +24,9 @@ public class CheckEntry extends IncrementEntity {
     private String normalValue;
 
     @Transient
+    private List<CheckEntry> childrenEntries;
+
+    @Transient
     private List<CheckEntryItem> checkEntryItemList;
 
     public long getParentId() {
@@ -64,5 +67,13 @@ public class CheckEntry extends IncrementEntity {
 
     public void setNormalValue(String normalValue) {
         this.normalValue = normalValue;
+    }
+
+    public List<CheckEntry> getChildrenEntries() {
+        return childrenEntries;
+    }
+
+    public void setChildrenEntries(List<CheckEntry> childrenEntries) {
+        this.childrenEntries = childrenEntries;
     }
 }
