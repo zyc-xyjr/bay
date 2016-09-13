@@ -75,4 +75,5 @@ public class CheckEntryItem extends IncrementEntity {
     public void setItemSection(String itemSection) {
         this.itemSection = itemSection;
     }
+
 }

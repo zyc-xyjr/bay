@@ -9,15 +9,12 @@ import javax.persistence.*;
  * 引起这些检查结果的可能性原因
  */
 @Entity
-@Table(name = "tb_sickness_cause")
+@Table(name = "tb_pathogen")
 public class Pathogen extends IncrementEntity {
 
     @Column(name = "pathogen_type")
     @Enumerated(EnumType.STRING)
     private PathogenType pathogenType;
-
-    @Column(name = "percent")
-    private float percent;
 
     @Column(name = "cause_name")
     private String causeName;
@@ -30,11 +27,11 @@ public class Pathogen extends IncrementEntity {
         this.pathogenType = pathogenType;
     }
 
-    public float getPercent() {
-        return percent;
+    public String getCauseName() {
+        return causeName;
     }
 
-    public void setPercent(float percent) {
-        this.percent = percent;
+    public void setCauseName(String causeName) {
+        this.causeName = causeName;
     }
 }

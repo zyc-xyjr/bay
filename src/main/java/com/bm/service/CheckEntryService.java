@@ -1,6 +1,7 @@
 package com.bm.service;
 
 import com.bm.entity.CheckEntry;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface CheckEntryService {
     List<CheckEntry> findEntriesByParentId(long parentId);
 
     void removeCheckEntry(long id);
+
+    Page<CheckEntry> pageAllCheckEntry(int pageNo, int pageSize);
+
+    void batchDelCheckEntry(List<Long> ids);
 }

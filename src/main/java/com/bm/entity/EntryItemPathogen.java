@@ -12,18 +12,21 @@ import javax.persistence.Table;
 @Table(name = "tb_entry_item_pathogen")
 public class EntryItemPathogen extends IncrementEntity {
 
-    @Column(name = "entry_id")
-    private long entryId;
+    @Column(name = "item_id")
+    private long itemId;
 
     @Column(name = "pathogen_id")
     private long pathogenId;
 
-    public long getEntryId() {
-        return entryId;
+    @Column(name = "percent")
+    private float percent;
+
+    public long getItemId() {
+        return itemId;
     }
 
-    public void setEntryId(long entryId) {
-        this.entryId = entryId;
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 
     public long getPathogenId() {
@@ -32,5 +35,13 @@ public class EntryItemPathogen extends IncrementEntity {
 
     public void setPathogenId(long pathogenId) {
         this.pathogenId = pathogenId;
+    }
+
+    public float getPercent() {
+        return percent;
+    }
+
+    public void setPercent(float percent) {
+        this.percent = percent;
     }
 }

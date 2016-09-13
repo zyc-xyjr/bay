@@ -14,6 +14,10 @@ public class CheckEntry extends IncrementEntity {
     @Column(name = "parent_id")
     private long parentId;
 
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "parent_id",insertable = false,updatable = false)
+//    private CheckEntry checkEntry;
+
     @Column(name = "entry_name")
     private String entryName;
 
@@ -22,6 +26,9 @@ public class CheckEntry extends IncrementEntity {
 
     @Column(name = "normal_value")
     private String normalValue;
+
+    @Column(name = "unit")
+    private String unit;
 
     @Transient
     private List<CheckEntry> childrenEntries;
@@ -76,4 +83,20 @@ public class CheckEntry extends IncrementEntity {
     public void setChildrenEntries(List<CheckEntry> childrenEntries) {
         this.childrenEntries = childrenEntries;
     }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    /*    public CheckEntry getCheckEntry() {
+        return checkEntry;
+    }
+
+    public void setCheckEntry(CheckEntry checkEntry) {
+        this.checkEntry = checkEntry;
+    }*/
 }

@@ -4,6 +4,8 @@ import com.bm.dao.CheckEntryDao;
 import com.bm.entity.CheckEntry;
 import com.bm.service.CheckEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +39,18 @@ public class CheckEntryImpl implements CheckEntryService {
     @Override
     public void removeCheckEntry(long id) {
         checkEntryDao.delete(id);
+    }
+
+    @Override
+    public Page<CheckEntry> pageAllCheckEntry(int pageNo, int pageSize) {
+        PageRequest pageRequest = new PageRequest(pageNo-1,pageSize,null);
+        Page<CheckEntry> checkEntryPage = this.checkEntryDao.findAll(pageRequest);
+        return checkEntryPage;
+    }
+
+    @Override
+    public void batchDelCheckEntry(List<Long> ids) {
+        List<CheckEntry> checkEntries =(List<CheckEntry>) this.checkEntryDao.findAll(ids);
+        this.checkEntryDao.delete(checkEntries);
     }
 }
