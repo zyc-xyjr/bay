@@ -15,4 +15,6 @@ public interface CheckEntryItemService {
     List<CheckEntryItem> findAllCheckEntryItem();
 
     void removeCheckEntryItem(long id);
+
+    List<CheckEntryItem> entryItemsByEntryId(long entryId);
 }

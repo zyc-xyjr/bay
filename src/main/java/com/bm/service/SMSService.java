@@ -5,6 +5,10 @@ package com.bm.service;
  * 短信相关业务逻辑
  */
 public interface SMSService {
-
-
+    /**
+     * 发送短信验证码
+     * @param mobile
+     * @param authCode
+     */
+    void sendAuthCode(String mobile,String authCode);
 }

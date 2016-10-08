@@ -29,4 +29,9 @@ public class CheckEntryItemServiceImpl implements CheckEntryItemService {
     public void removeCheckEntryItem(long id) {
         checkEntryItemDao.delete(id);
     }
+
+    @Override
+    public List<CheckEntryItem> entryItemsByEntryId(long entryId) {
+        return this.checkEntryItemDao.getItemListByEntryId(entryId);
+    }
 }

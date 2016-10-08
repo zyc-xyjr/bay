@@ -62,9 +62,9 @@ public class CheckEntryResource {
     }
     @RequestMapping("/checkEntry/add")
     public String AddcheckEntry(CheckEntry checkEntry,
-                                      @RequestParam("itemLabel") String[] itemLabels,
-                                      @RequestParam("itemSection") String[] itemSections,
-                                      @RequestParam("pathogenId") Long[] pathogenIds){
+                                      @RequestParam(value = "itemLabel",required = false) String[] itemLabels,
+                                      @RequestParam(value = "itemSection",required = false) String[] itemSections,
+                                      @RequestParam(value = "pathogenId",required = false) Long[] pathogenIds){
 
         checkEntryService.saveCheckEntry(checkEntry);
         int length = itemLabels.length;
@@ -101,5 +101,11 @@ public class CheckEntryResource {
         }
         this.checkEntryService.batchDelCheckEntry(idList);
         return "redirect:/admin/ftl/checkEntry/list";
+    }
+
+    @RequestMapping("/checkEntry/ajax/all")
+    @ResponseBody
+    public List<CheckEntry> checkEntryAjaxAll(){
+        return checkEntryService.findAllCheckEntry();
     }
 }

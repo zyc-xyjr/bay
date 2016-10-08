@@ -17,6 +17,6 @@ public interface CheckEntryItemDao extends PagingAndSortingRepository<CheckEntry
      * @param entryId
      * @return
      */
-/*    @Query(value = "select * from CheckEntryItem where entryId=?1")
-    List<CheckEntryItem> getItemListByEntryId(long entryId);*/
+    @Query(value = "select it from CheckEntryItem it where it.entryId=?1")
+    List<CheckEntryItem> getItemListByEntryId(long entryId);
 }
