@@ -19,6 +19,7 @@
 <div class="easyui-panel" title="New Topic" style="width:500px;height:600px;max-width:400px;padding:30px 60px;">
     <form id="ff" action="/admin/dictionary/checkEntry/add" method="post">
         <div style="margin-bottom:20px">
+            <label>上级：</label>
             <select class="easyui-combobox" name="parentId" label="Language" style="width:100%">
                 <option value="0">无</option>
                 <#list parentEntries as entry>
@@ -27,12 +28,15 @@
             </select>
         </div>
         <div style="margin-bottom:20px">
+            <label>检查项名称：</label>
             <input class="easyui-textbox" name="entryName" style="width:100%" data-options="label:'Name:',required:true" placeholder="检查值名称：红细胞计数">
         </div>
         <div style="margin-bottom:20px">
+            <label>检查项代码：</label>
             <input class="easyui-textbox" name="entryKey" style="width:100%" data-options="label:'Name:',required:true" placeholder="检查值代码">
         </div>
         <div style="margin-bottom:20px">
+            <label>单位：</label>
             <input class="easyui-textbox" name="unit" style="width:100%" data-options="label:'Name:',required:true" placeholder="单位">
         </div>
 
@@ -41,12 +45,19 @@
 
         <div style="margin-bottom:20px">
 
-                <input class="easyui-textbox" name="itemLabel" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低（<25）">
-                <select class="easyui-combobox" name="pathogenId" label="Language" style="width:100%">
-                    <#list pathogenList as pathogen>
-                        <option value="${pathogen.id}">${pathogen.causeName}</option>
-                    </#list>
-                </select>
+            异常情况：<input class="easyui-textbox" name="itemLabel" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+            区间：<input class="easyui-textbox" name="smallValue" style="width:30%"  >
+            -<input class="easyui-textbox" name="bigValue" style="width:30%" >
+            异常指标解析：<input class="easyui-textbox" name="analysis" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+            诊疗建议：<input class="easyui-textbox" name="medicalAdvice" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+            生活指导：<input class="easyui-textbox" name="lifeGuidance" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+            就诊科室：<input class="easyui-textbox" name="clinicDepartment" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+
+        <#--         <select class="easyui-combobox" name="pathogenId" label="Language" style="width:100%">
+                         <#list pathogenList as pathogen>
+                             <option value="${pathogen.id}">${pathogen.causeName}</option>
+                         </#list>
+                     </select>-->
 
         </div>
     </form>

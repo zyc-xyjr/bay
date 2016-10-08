@@ -12,7 +12,7 @@
     <script type="text/javascript">
         var _menus = {"menus":[
             {"menuid":"1","icon":"icon-sys","menuname":"系统管理",
-                "menus":[{"menuname":"菜单管理","icon":"icon-nav","url":"/admin/ftl/checkEntry/list"},
+                "menus":[{"menuname":"检查项管理","icon":"icon-nav","url":"/admin/ftl/checkEntry/list"},
                 /*    {"menuname":"添加用户","icon":"icon-add","url":"/admin/ftl/pathogen/list"},
                     {"menuname":"用户管理","icon":"icon-users","url":"demo2.html"},
                     {"menuname":"角色管理","icon":"icon-role","url":"demo2.html"},

@@ -62,21 +62,31 @@ public class CheckEntryResource {
     }
     @RequestMapping("/checkEntry/add")
     public String AddcheckEntry(CheckEntry checkEntry,
-                                      @RequestParam(value = "itemLabel",required = false) String[] itemLabels,
-                                      @RequestParam(value = "itemSection",required = false) String[] itemSections,
-                                      @RequestParam(value = "pathogenId",required = false) Long[] pathogenIds){
+                                @RequestParam(required = false) String[] itemLabel,
+                                @RequestParam(required = false) Float[] smallValue,
+                                @RequestParam(required = false) Float[] bigValue,
+                                @RequestParam(required = false) String[] analysis,
+                                @RequestParam(required = false) String[] medicalAdvice,
+                                @RequestParam(required = false) String[] lifeGuidance,
+                                @RequestParam(required = false) String[] clinicDepartment
+                                ){
 
         checkEntryService.saveCheckEntry(checkEntry);
-        int length = itemLabels.length;
+        int length = itemLabel.length;
         for (int i=0;i<length;i++){
             CheckEntryItem checkEntryItem = new CheckEntryItem();
             checkEntryItem.setEntryId(checkEntry.getId());
-            checkEntryItem.setItemLabel(itemLabels[i]);
-            checkEntryItem.setItemSection(itemSections[i]);
+            checkEntryItem.setItemLabel(itemLabel[i]);
+            checkEntryItem.setSmallValue(smallValue[i]);
+            checkEntryItem.setBigValue(bigValue[i]);
+            checkEntryItem.setAnalysis(analysis[i]);
+            checkEntryItem.setMedicalAdvice(medicalAdvice[i]);
+            checkEntryItem.setLifeGuidance(lifeGuidance[i]);
+            checkEntryItem.setClinicDepartment(clinicDepartment[i]);
             checkEntryItemService.saveCheckEntryItem(checkEntryItem);
-            EntryItemPathogen entryItemPathogen = new EntryItemPathogen();
+       /*     EntryItemPathogen entryItemPathogen = new EntryItemPathogen();
             entryItemPathogen.setItemId(checkEntryItem.getId());
-            entryItemPathogen.setPathogenId(pathogenIds[i]);
+            entryItemPathogen.setPathogenId(pathogenIds[i]);*/
         }
         return "redirect:/admin/ftl/checkEntry/list";
     }

@@ -19,11 +19,23 @@ public class CheckEntryItem extends IncrementEntity {
     @Column(name = "item_label")
     private String itemLabel;
 
-    @Column(name = "item_key")
-    private String itemKey;
+    @Column(name = "small_value")
+    private float smallValue;
 
-    @Column(name = "item_section")
-    private String itemSection;
+    @Column(name = "big_value")
+    private float bigValue;
+
+    @Column(name = "analysis")
+    private String analysis;
+
+    @Column(name = "medical_advice")
+    private String medicalAdvice;
+
+    @Column(name = "life_guidance")
+    private String lifeGuidance;
+
+    @Column(name = "clinic_department")
+    private String clinicDepartment;
 
     @Transient
     private List<Sickness> sicknessList;
@@ -44,13 +56,7 @@ public class CheckEntryItem extends IncrementEntity {
         this.itemLabel = itemLabel;
     }
 
-    public String getItemKey() {
-        return itemKey;
-    }
 
-    public void setItemKey(String itemKey) {
-        this.itemKey = itemKey;
-    }
 
     public List<Sickness> getSicknessList() {
         return sicknessList;
@@ -68,12 +74,51 @@ public class CheckEntryItem extends IncrementEntity {
         this.entryId = entryId;
     }
 
-    public String getItemSection() {
-        return itemSection;
+    public float getSmallValue() {
+        return smallValue;
     }
 
-    public void setItemSection(String itemSection) {
-        this.itemSection = itemSection;
+    public void setSmallValue(float smallValue) {
+        this.smallValue = smallValue;
     }
 
+    public float getBigValue() {
+        return bigValue;
+    }
+
+    public void setBigValue(float bigValue) {
+        this.bigValue = bigValue;
+    }
+
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis;
+    }
+
+    public String getMedicalAdvice() {
+        return medicalAdvice;
+    }
+
+    public void setMedicalAdvice(String medicalAdvice) {
+        this.medicalAdvice = medicalAdvice;
+    }
+
+    public String getLifeGuidance() {
+        return lifeGuidance;
+    }
+
+    public void setLifeGuidance(String lifeGuidance) {
+        this.lifeGuidance = lifeGuidance;
+    }
+
+    public String getClinicDepartment() {
+        return clinicDepartment;
+    }
+
+    public void setClinicDepartment(String clinicDepartment) {
+        this.clinicDepartment = clinicDepartment;
+    }
 }
