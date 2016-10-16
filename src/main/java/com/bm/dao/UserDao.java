@@ -14,4 +14,7 @@ public interface UserDao extends PagingAndSortingRepository<User,Long> {
 
     @Query(value = "select u from User u where u.userName=?1")
     List<User> getUserByUserName(String userName);
+
+    @Query(value = "select u from User u where u.userName=?1 and u.password=?2")
+    User getLoginUser(String userName , String password);
 }

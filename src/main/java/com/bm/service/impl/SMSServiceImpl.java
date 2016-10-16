@@ -2,10 +2,12 @@ package com.bm.service.impl;
 
 import com.bm.service.SMSService;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2016/10/6.
  */
+@Service("smsService")
 public class SMSServiceImpl implements SMSService {
 
     @Override

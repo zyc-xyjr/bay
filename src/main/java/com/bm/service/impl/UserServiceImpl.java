@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/18.
  */
@@ -24,9 +26,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserByUserName(String userName) {
-        try{
-            return this.userDao.getUserByUserName(userName).get(0);
-        }catch (NullPointerException e){
+        List<User> userList = this.userDao.getUserByUserName(userName);
+        if (userList!=null&&userList.size()>0){
+            return userList.get(0);
+        }else {
             return null;
         }
     }
@@ -38,7 +41,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getLoginUser(String userName, String password) {
-        return null;
+        return this.userDao.getLoginUser(userName, password);
     }
 
     @Override

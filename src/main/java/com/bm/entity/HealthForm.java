@@ -1,5 +1,6 @@
 package com.bm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -10,12 +11,16 @@ import javax.persistence.Table;
 @Table(name = "tb_health_form")
 public class HealthForm extends IncrementEntity {
 
+    @Column(name = "userId")
     private Long userId;
 
+    @Column(name = "form_name")
     private String formName;
 
+    @Column(name = "file_name")
     private String fileName;
 
+    @Column(name = "file_path")
     private String filePath;
 
     public Long getUserId() {
