@@ -1,5 +1,8 @@
 package com.bm.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2016/9/6.
  */
@@ -9,9 +12,10 @@ public class ResultModel extends BaseModel{
 
     private String msg;
 
-    private Object data;
+    private Map data;
 
-    public ResultModel(int status, String msg, Object data) {
+
+    public ResultModel(int status, String msg, Map data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
@@ -33,11 +37,20 @@ public class ResultModel extends BaseModel{
         this.msg = msg;
     }
 
-    public Object getData() {
+
+    public Map getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Map data) {
         this.data = data;
+    }
+
+    public ResultModel put(String key , Object value){
+        if (data==null){
+            data = new LinkedHashMap();
+        }
+        data.put(key,value);
+        return this;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Administrator on 2016/10/15.
@@ -65,11 +66,11 @@ public class FileResource {
                 healthFormService.saveHelthForm(healthForm);
             } catch (IOException e) {
                 e.printStackTrace();
-                return new ResultModel(1,"上传图片异常","");
+                return new ResultModel(1,"上传图片异常",new LinkedHashMap());
             }
 
         }
-        return new ResultModel(0,"success","");
+        return new ResultModel(0,"success",new LinkedHashMap());
 
     }
 
