@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="android-logging-log4j-1.0.3">
+    <CLASSES>
+      <root url="jar://D:/lib/android-logging-log4j-1.0.3.jar!/" />
+      <root url="jar://D:/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar!/" />
+      <root url="jar://D:/lib/dom4j-1.6.1.jar!/" />
+      <root url="jar://D:/lib/gson-2.2.4.jar!/" />
+      <root url="jar://D:/lib/httpclient.jar!/" />
+      <root url="jar://D:/lib/log4j-1.2.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
