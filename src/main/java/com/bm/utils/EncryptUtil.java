@@ -12,13 +12,15 @@
  */
 package com.bm.utils;
 
+import com.bm.utils.encoder.BASE64Decoder;
+import com.bm.utils.encoder.BASE64Encoder;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.cloopen.rest.sdk.utils.encoder.BASE64Decoder;
-import com.cloopen.rest.sdk.utils.encoder.BASE64Encoder;
+
 
 public class EncryptUtil
 {

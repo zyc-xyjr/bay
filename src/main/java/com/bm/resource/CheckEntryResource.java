@@ -4,6 +4,7 @@ import com.bm.entity.CheckEntry;
 import com.bm.entity.CheckEntryItem;
 import com.bm.entity.EntryItemPathogen;
 import com.bm.entity.Pathogen;
+import com.bm.model.ResultModel;
 import com.bm.service.CheckEntryService;
 import com.bm.service.PathogenService;
 import com.bm.service.impl.CheckEntryItemService;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by Administrator on 2016/9/8.
@@ -32,17 +34,22 @@ public class CheckEntryResource {
     @Autowired
     private PathogenService pathogenService;
 
+    private Logger logger = Logger.getLogger(CheckEntryResource.class.getName());
+
     @RequestMapping("/checkEntry/list")
-    public ModelAndView checkEntryList(){
-        ModelAndView modelAndView = new ModelAndView("checkEntryList");
+    @ResponseBody
+    public ResultModel checkEntryList(){
+        /*ModelAndView modelAndView = new ModelAndView("checkEntryList");*/
+        logger.info("request come in....");
         List<CheckEntry> checkEntries=checkEntryService.findEntriesByParentId(0l);
         for (CheckEntry checkEntry:checkEntries){
             checkEntry.setChildrenEntries(checkEntryService.findEntriesByParentId(checkEntry.getId()));
         }
         List<Pathogen> pathogenList = pathogenService.findAllPathogen();
-        modelAndView.addObject("pathogenList",pathogenList);
-        modelAndView.addObject("checkEntryList",checkEntries);
-        return modelAndView;
+        ResultModel resultModel = new ResultModel(0,"success",new LinkedHashMap());
+        resultModel.put("pathogenList",pathogenList);
+        resultModel.put("checkEntryList",checkEntries);
+        return resultModel;
 
 
     }

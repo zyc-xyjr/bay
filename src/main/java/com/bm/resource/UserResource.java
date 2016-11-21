@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Administrator on 2016/9/18.
@@ -54,12 +55,12 @@ public class UserResource {
                 user.setUserName(mobile);
                 user.setPassword(password);
                 userService.register(user);
-                return new ResultModel(0,"success","");
+                return new ResultModel(0,"success",new LinkedHashMap());
             }else {
-                return new ResultModel(1,"用户名已存在","");
+                return new ResultModel(1,"用户名已存在",new LinkedHashMap());
             }
         }catch (Exception e){
-            return new ResultModel(1,"系统错误","");
+            return new ResultModel(1,"系统错误",new LinkedHashMap());
         }
     }
 
@@ -86,9 +87,9 @@ public class UserResource {
             }
             sessionService.saveSessionEntiry(entiry);
             smsService.sendAuthCode(mobile, code);
-            return new ResultModel(0,"success",code);
+            return new ResultModel(0,"success",new LinkedHashMap()).put("code",code);
         }catch (Exception e){
-            return new ResultModel(1,"系统错误","");
+            return new ResultModel(1,"系统错误",new LinkedHashMap());
         }
     }
 
@@ -107,15 +108,15 @@ public class UserResource {
         try{
             SessionEntity sessionEntity = this.sessionService.getSessionEntity(mobile,0);
             if (sessionEntity==null||!code.equals(sessionEntity.getContext())){
-                return new ResultModel(1,"验证码不正确","");
+                return new ResultModel(1,"验证码不正确",new LinkedHashMap());
             }else {
                 sessionEntity.setStatus(0);
                 this.sessionService.saveSessionEntiry(sessionEntity);
-                return new ResultModel(0,"success","");
+                return new ResultModel(0,"success",new LinkedHashMap());
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ResultModel(1,"系统错误","");
+            return new ResultModel(1,"系统错误",new LinkedHashMap());
         }
     }
 
@@ -134,14 +135,14 @@ public class UserResource {
         try{
             User user = userService.getLoginUser(mobile,password);
             if(user==null){
-                return new ResultModel(1,"用户名和密码不匹配","");
+                return new ResultModel(1,"用户名和密码不匹配",new LinkedHashMap());
             }else {
                 SessionEntity sessionEntity = new SessionEntity(mobile,user.getId()+"",1,1,new Date());
                 sessionService.saveSessionEntiry(sessionEntity);
-                return new ResultModel(0,"success",user);
+                return new ResultModel(0,"success",new LinkedHashMap()).put("user",user);
             }
         }catch (Exception e){
-            return new ResultModel(1,"系统错误","");
+            return new ResultModel(1,"系统错误",new LinkedHashMap());
         }
     }
 

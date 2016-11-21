@@ -1,7 +1,8 @@
 package com.bm.service.impl;
 
 import com.bm.service.SMSService;
-import com.cloopen.rest.sdk.CCPRestSmsSDK;
+
+import com.bm.sms.CCPRestSmsSDK;
 import org.springframework.stereotype.Service;
 
 /**

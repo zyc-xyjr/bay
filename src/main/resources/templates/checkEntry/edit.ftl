@@ -46,20 +46,38 @@
         <div style="margin-bottom:20px">
 
             异常情况：<input class="easyui-textbox" name="itemLabel" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
-            区间：<input class="easyui-textbox" name="smallValue" style="width:30%"  >
-            -<input class="easyui-textbox" name="bigValue" style="width:30%" >
-            异常指标解析：<input class="easyui-textbox" name="analysis" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
-            诊疗建议：<input class="easyui-textbox" name="medicalAdvice" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
-            生活指导：<input class="easyui-textbox" name="lifeGuidance" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
-            就诊科室：<input class="easyui-textbox" name="clinicDepartment" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
 
-        <#--         <select class="easyui-combobox" name="pathogenId" label="Language" style="width:100%">
-                         <#list pathogenList as pathogen>
-                             <option value="${pathogen.id}">${pathogen.causeName}</option>
-                         </#list>
-                     </select>-->
 
         </div>
+
+
+    <#--         <select class="easyui-combobox" name="pathogenId" label="Language" style="width:100%">
+                     <#list pathogenList as pathogen>
+                         <option value="${pathogen.id}">${pathogen.causeName}</option>
+                     </#list>
+                 </select>-->
+        <div style="margin-bottom:20px">
+            区间：<input class="easyui-textbox" name="smallValue" style="width:30%"  >
+            -<input class="easyui-textbox" name="bigValue" style="width:30%" >
+        </div>
+        <div style="margin-bottom:20px">
+            异常指标解析：<input class="easyui-textbox" name="analysis" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+
+        </div>
+
+        <div style="margin-bottom:20px">
+            诊疗建议：<input class="easyui-textbox" name="medicalAdvice" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+
+        </div>
+
+        <div style="margin-bottom:20px">
+            生活指导：<input class="easyui-textbox" name="lifeGuidance" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+
+        </div>
+        <div style="margin-bottom:20px">       就诊科室：<input class="easyui-textbox" name="clinicDepartment" style="width:75%" data-options="label:'Name:',required:true" placeholder="检查结果：中度偏低">
+    </div>
+
+
     </form>
     <div style="text-align:center;padding:5px 0">
         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>

@@ -11,9 +11,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import ytx.org.apache.http.conn.scheme.Scheme;
-import ytx.org.apache.http.conn.ssl.SSLSocketFactory;
-import ytx.org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 public class CcopHttpClient
 {

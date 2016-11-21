@@ -3,11 +3,11 @@ package com.bm.utils;
 import java.util.Date;
 import java.util.Properties;
 
+import com.bm.sms.CCPRestSmsSDK;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import com.cloopen.rest.sdk.CCPRestSmsSDK;
 
 
 public class LoggerUtil {
