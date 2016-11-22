@@ -2,6 +2,8 @@ package com.bm.service;
 
 import com.bm.entity.User;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/6.
  * 用户相关业务逻辑
@@ -41,5 +43,7 @@ public interface UserService {
      */
     void updateUser(User user);
 
+    User getById(long id);
 
+    List<User> findAll();
 }

@@ -45,7 +45,7 @@ public class UserResource {
     @ResponseBody
     @ApiOperation(value = "用户注册",httpMethod = "POST")
     public ResultModel register(
-            @ApiParam(required = true,name = "userName",value = "用户名（手机号）") String mobile,
+            @ApiParam(required = true,name = "mobile",value = "用户名（手机号）") String mobile,
             @ApiParam(required = true,name = "password",value = "密码") String password
             ){
         try{
@@ -144,6 +144,69 @@ public class UserResource {
         }catch (Exception e){
             return new ResultModel(1,"系统错误",new LinkedHashMap());
         }
+    }
+    /**
+     * 重置登录密码
+     * @param request
+     * @param mobile
+     * @return
+     */
+    @RequestMapping("/password/update")
+    @ResponseBody
+    @ApiOperation(value = "找回密码",httpMethod = "POST")
+    public ResultModel findPwd(HttpServletRequest request,
+                               @ApiParam(required = true,name = "mobile",value = "手机号")String mobile,
+                               @ApiParam(required = true,name = "password",value = "密码")String password){
+        User user = userService.getUserByUserName(mobile);
+        if(user==null){
+            return new ResultModel(1,"该用户不存在",new LinkedHashMap());
+        }else {
+            user.setPassword(password);
+            userService.updateUser(user);
+            return new ResultModel(0,"success",new LinkedHashMap());
+        }
+    }
+
+    /**
+     * 完善个人信息
+     * @param request
+     * @return
+     */
+    @RequestMapping("/info/update")
+    @ResponseBody
+    @ApiOperation(value = "完善个人信息",httpMethod = "POST")
+    public ResultModel updateUserInfo(HttpServletRequest request,
+                               @ApiParam(required = true,name = "userId",value = "用户id")Long userId,
+                               @ApiParam(required = true,name = "name",value = "姓名")String name,
+                               @ApiParam(required = true,name = "age",value = "年龄")Integer age,
+                               @ApiParam(required = true,name = "height",value = "身高")Float height,
+                               @ApiParam(required = true,name = "weight",value = "体重")Float weight,
+                               @ApiParam(required = true,name = "waistline",value = "腰围")Float waistline,
+                               @ApiParam(required = true,name = "gender",value = "性别（M女 F男）")String gender){
+        User user = userService.getById(userId);
+        if(user==null){
+            return new ResultModel(1,"该用户不存在",new LinkedHashMap());
+        }else {
+            user.setName(name);
+            user.setAge(age);
+            user.setHeight(height);
+            user.setWeight(weight);
+            user.setWaistline(waistline);
+            user.setGender(gender);
+            userService.updateUser(user);
+            return new ResultModel(0,"success",new LinkedHashMap());
+        }
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @RequestMapping("/list")
+    @ResponseBody
+    @ApiOperation(value = "查询所有用户",httpMethod = "GET")
+    public ResultModel findAll(){
+        return new ResultModel(0,"success",new LinkedHashMap()).put("userList",userService.findAll());
     }
 
 

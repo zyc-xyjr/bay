@@ -39,6 +39,9 @@ public class User extends IncrementEntity {
     @Column(name = "age")
     private Integer age;//年龄
 
+    @Column(name = "gender")//M女 F男
+    private String gender;
+
     public String getNickName() {
         return nickName;
     }
@@ -109,5 +112,13 @@ public class User extends IncrementEntity {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

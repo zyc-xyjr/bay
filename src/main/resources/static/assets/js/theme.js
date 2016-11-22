@@ -26,3 +26,35 @@ function storageLoad(objectName) {
         return false
     }
 }
+/**
+ * 基础请求方法
+ * @param u
+ * @param m
+ * @param t
+ * @param func
+ */
+function baseRequest(u,m,t,func){
+    console.log("request before...");
+    $.ajax({
+        url:u,
+        async:true,
+        type:m,
+        dataType:t,
+        success:function(data){
+            console.log("request success...");
+            console.log(data);
+            if (data.status==0){
+                console.log("执行回调函数...");
+                func(data);
+            } else {
+                console.log("请求失败,提示错误信息..."+data.msg);
+                alert(data.msg);
+            }
+        },
+        error:function(request,msg,obejct){
+            console.log("request error..."+msg+"_"+obejct);
+        }
+    })
+    console.log("request after...");
+
+}

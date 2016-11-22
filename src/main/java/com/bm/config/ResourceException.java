@@ -4,7 +4,7 @@ package com.bm.config;
  * Created by Administrator on 2016/10/29.
  */
 
-import com.nnfe.model.ResultModel;
+import com.bm.model.ResultModel;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

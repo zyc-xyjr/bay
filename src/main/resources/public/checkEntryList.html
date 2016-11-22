@@ -24,22 +24,7 @@
 <body data-type="widgets">
     <script src="assets/js/theme.js"></script>
     <script type="text/javascript">
-        function baseRequest(u,m,t){
-            console.log("request before...");
-            $.ajax({
-                url:u,
-                async:true,
-                type:m,
-                dataType:t,
-                success:function(data){
-                    console.log("request success..."+msg);
-                    console.log(data);
-                },
-                error:function(request,msg,obejct){
-                    console.log("request error..."+msg+"_"+obejct);
-                }
-            })
-        }
+
         $(document).ready(function(){
             baseRequest("http://localhost:9000/admin/dictionary/checkEntry/list","GET","jsonp");
         })

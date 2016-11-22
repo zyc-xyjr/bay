@@ -17,7 +17,7 @@ public class SystemConfig {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(systemLoginFilter);
         filterRegistrationBean.setEnabled(true);
-        filterRegistrationBean.addUrlPatterns("/admin/*");
+        filterRegistrationBean.addUrlPatterns("/sss");
         return filterRegistrationBean;
     }
 }
