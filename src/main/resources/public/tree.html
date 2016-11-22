@@ -19,7 +19,10 @@
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" href="assets/css/zTreeStyle.css">
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.ztree.core.min.js"></script>
+    <script src="assets/js/jquery.ztree.core.min.js"></script>.
+    <script src="assets/js/jquery.ztree.excheck.min.js"></script>
+    <script src="assets/js/jquery.ztree.exedit.min.js"></script>
+
 
 </head>
 
@@ -29,16 +32,19 @@
     <script type="text/javascript">
         function initTree(data){
             var t = $("#tree");
-            t = $.fn.zTree.init(t, check_setting, zNodes);
+            t = $.fn.zTree.init(t, check_setting, data.checkEntryList);
             demoIframe = $("#testIframe");
             demoIframe.bind("load", loadReady);
             var zTree = $.fn.zTree.getZTreeObj("tree");
-            zTree.selectNode(zTree.getNodeByParam("id", 101));
+            zTree.selectNode(zTree.getNodeByParam("id", 1));
         }
         $(document).ready(function(){
-            baseRequest("http://localhost/admin/dictionary/checkEntry/list","GET","json",initTree());
-
+            baseRequest("http://localhost/admin/dictionary/checkEntry/list","GET","json",initTree);
         });
+        //异步提交表单
+        function submitForm(){
+           postRequest("http://localhost/admin/dictionary/checkEntry/ajax/save",$("#form").serialize(),initTree);
+        }
     </script>
     <div class="am-g tpl-g">
         <!-- 头部 -->
@@ -290,6 +296,80 @@
 
         <!-- 内容区域 -->
         <ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
+        <div id="rMenu">
+            <ul>
+                <li id="m_add" onclick="addTreeNode();">Add Node</li>
+                <li id="m_del" onclick="removeTreeNode();">Delete Node</li>
+                <li id="m_check" onclick="checkTreeNode(true);">Check Node</li>
+                <li id="m_unCheck" onclick="checkTreeNode(false);">Uncheck Node</li>
+                <li id="m_reset" onclick="resetTree();">Resume zTree</li>
+            </ul>
+        </div>
+        <button type="button" style="margin-top: auto;margin-left: 0">提交</button>
+        <div class="row" style="margin:-80px -10px 0 500px">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">边框表单</div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+
+                        <form id="form" class="am-form tpl-form-border-form tpl-form-border-br">
+                            <input type="hidden" class="tpl-form-input" id="id"  name="id" >
+                            <input type="hidden" class="tpl-form-input" id="parentId"  name="parentId" >
+
+                            <div class="am-form-group">
+                                <label for="entryKey" class="am-u-sm-3 am-form-label">检查项代码 <span class="tpl-form-line-small-title">Code</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="entryKey"  name="entryKey" placeholder="请输入检查项代码">
+                                    <small>请填写检查项代码</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="entryName" class="am-u-sm-3 am-form-label">检查项名称 <span class="tpl-form-line-small-title">Name</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="entryName" name="entryName" placeholder="请输入检查项名称">
+                                    <small>请填写检查项名称10-20字左右。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="normalMinValue" class="am-u-sm-3 am-form-label">参考值下限 <span class="tpl-form-line-small-title">Min</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="normalMinValue" name="normalMinValue" placeholder="请输入参考值">
+                                    <small>请输入参考值。</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="normalMaxValue" class="am-u-sm-3 am-form-label">参考值上限 <span class="tpl-form-line-small-title">Max</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="normalMaxValue" name="normalMaxValue" placeholder="请输入参考值">
+                                    <small>请输入参考值。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="unit" class="am-u-sm-3 am-form-label">参考值单位 <span class="tpl-form-line-small-title">Unit</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="unit" name="unit" placeholder="请输入参考值单位">
+                                    <small>请输入参考值单位。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="assets/js/amazeui.min.js"></script>
     <script src="assets/js/amazeui.datatables.min.js"></script>

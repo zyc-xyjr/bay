@@ -12,11 +12,7 @@ import java.util.List;
 public class CheckEntry extends IncrementEntity {
 
     @Column(name = "parent_id")
-    private long parentId;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "parent_id",insertable = false,updatable = false)
-//    private CheckEntry checkEntry;
+    private Long parentId = 0l;
 
     @Column(name = "entry_name")
     private String entryName;
@@ -24,23 +20,24 @@ public class CheckEntry extends IncrementEntity {
     @Column(name = "entry_key")
     private String entryKey;
 
+    @Column(name = "normal_min_value")
+    private String normalMinValue;
+
+    @Column(name = "normal_max_value")
+    private String normalMaxValue;
+
     @Column(name = "normal_value")
     private String normalValue;
 
     @Column(name = "unit")
     private String unit;
 
-    @Transient
-    private List<CheckEntry> childrenEntries;
 
-    @Transient
-    private List<CheckEntryItem> checkEntryItemList;
-
-    public long getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(long parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -60,13 +57,6 @@ public class CheckEntry extends IncrementEntity {
         this.entryKey = entryKey;
     }
 
-    public List<CheckEntryItem> getCheckEntryItemList() {
-        return checkEntryItemList;
-    }
-
-    public void setCheckEntryItemList(List<CheckEntryItem> checkEntryItemList) {
-        this.checkEntryItemList = checkEntryItemList;
-    }
 
     public String getNormalValue() {
         return normalValue;
@@ -76,12 +66,20 @@ public class CheckEntry extends IncrementEntity {
         this.normalValue = normalValue;
     }
 
-    public List<CheckEntry> getChildrenEntries() {
-        return childrenEntries;
+    public String getNormalMinValue() {
+        return normalMinValue;
     }
 
-    public void setChildrenEntries(List<CheckEntry> childrenEntries) {
-        this.childrenEntries = childrenEntries;
+    public void setNormalMinValue(String normalMinValue) {
+        this.normalMinValue = normalMinValue;
+    }
+
+    public String getNormalMaxValue() {
+        return normalMaxValue;
+    }
+
+    public void setNormalMaxValue(String normalMaxValue) {
+        this.normalMaxValue = normalMaxValue;
     }
 
     public String getUnit() {
@@ -92,11 +90,4 @@ public class CheckEntry extends IncrementEntity {
         this.unit = unit;
     }
 
-    /*    public CheckEntry getCheckEntry() {
-        return checkEntry;
-    }
-
-    public void setCheckEntry(CheckEntry checkEntry) {
-        this.checkEntry = checkEntry;
-    }*/
 }

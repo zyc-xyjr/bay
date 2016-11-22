@@ -45,7 +45,7 @@ function baseRequest(u,m,t,func){
             console.log(data);
             if (data.status==0){
                 console.log("执行回调函数...");
-                func(data);
+                func(data.data);
             } else {
                 console.log("请求失败,提示错误信息..."+data.msg);
                 alert(data.msg);
@@ -57,4 +57,34 @@ function baseRequest(u,m,t,func){
     })
     console.log("request after...");
 
+}
+
+/**
+ * 上传数据
+ * @param u
+ * @param d
+ */
+function postRequest(u,d,func){
+    console.log("post request before...");
+    $.ajax({
+        url:u,
+        async:true,
+        data:d,
+        type:"POST",
+        dataType:"json",
+        success:function(data){
+            console.log("post request success...");
+            if (data.status==0){
+                console.log("执行回调函数...");
+                func();
+            } else {
+                console.log("请求失败,提示错误信息..."+data.msg);
+                alert(data.msg);
+            }
+        },
+        error:function(request,msg,obejct){
+            console.log("post request error..."+msg+"_"+obejct);
+        }
+    })
+    console.log("post request after...");
 }

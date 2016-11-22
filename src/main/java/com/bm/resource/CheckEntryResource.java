@@ -39,20 +39,13 @@ public class CheckEntryResource {
     @RequestMapping("/checkEntry/list")
     @ResponseBody
     public ResultModel checkEntryList(){
-        /*ModelAndView modelAndView = new ModelAndView("checkEntryList");*/
         logger.info("request come in....");
-        List<CheckEntry> checkEntries=checkEntryService.findEntriesByParentId(0l);
-        for (CheckEntry checkEntry:checkEntries){
-            checkEntry.setChildrenEntries(checkEntryService.findEntriesByParentId(checkEntry.getId()));
-        }
-        List<Pathogen> pathogenList = pathogenService.findAllPathogen();
-        ResultModel resultModel = new ResultModel(0,"success",new LinkedHashMap());
-        resultModel.put("pathogenList",pathogenList);
-        resultModel.put("checkEntryList",checkEntries);
-        return resultModel;
+        List<CheckEntry> checkEntries=checkEntryService.findAllCheckEntry();
+        return new ResultModel(0,"success",new LinkedHashMap()).put("checkEntryList",checkEntries);
 
 
     }
+
     @RequestMapping("/checkEntry/toEdit")
     public ModelAndView toAddcheckEntry(@RequestParam(required = false) Long entryId){
         ModelAndView modelAndView = new ModelAndView("checkEntry/edit");
@@ -124,5 +117,12 @@ public class CheckEntryResource {
     @ResponseBody
     public List<CheckEntry> checkEntryAjaxAll(){
         return checkEntryService.findAllCheckEntry();
+    }
+
+    @RequestMapping("/checkEntry/ajax/save")
+    @ResponseBody
+    public ResultModel saveCheckEntry(CheckEntry checkEntry){
+        checkEntryService.saveCheckEntry(checkEntry);
+        return new ResultModel(0,"success",new LinkedHashMap());
     }
 }
