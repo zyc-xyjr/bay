@@ -23,6 +23,9 @@ public class HealthForm extends IncrementEntity {
     @Column(name = "file_path")
     private String filePath;
 
+    @Column(name = "status")
+    private String status;
+
     public Long getUserId() {
         return userId;
     }
@@ -53,5 +56,13 @@ public class HealthForm extends IncrementEntity {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

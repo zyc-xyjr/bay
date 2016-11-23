@@ -5,16 +5,15 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/9/9.
+ * 检查项对应的异常情况
  */
+
 @Entity
 @Table(name = "tb_check_entry_item")
 public class CheckEntryItem extends IncrementEntity {
 
     @Column(name = "entry_id")
     private long entryId;
-
-    @Transient
-    private CheckEntry checkEntry;
 
     @Column(name = "item_label")
     private String itemLabel;
@@ -25,28 +24,22 @@ public class CheckEntryItem extends IncrementEntity {
     @Column(name = "big_value")
     private float bigValue;
 
+/*    //异常解析
     @Column(name = "analysis")
     private String analysis;
 
+    //医学建议
     @Column(name = "medical_advice")
     private String medicalAdvice;
 
+    //生活指导
     @Column(name = "life_guidance")
     private String lifeGuidance;
 
-    @Column(name = "clinic_department")
+    @Column(name = "clinic_department")*/
     private String clinicDepartment;
 
-    @Transient
-    private List<Sickness> sicknessList;
 
-    public CheckEntry getCheckEntry() {
-        return checkEntry;
-    }
-
-    public void setCheckEntry(CheckEntry checkEntry) {
-        this.checkEntry = checkEntry;
-    }
 
     public String getItemLabel() {
         return itemLabel;
@@ -56,15 +49,6 @@ public class CheckEntryItem extends IncrementEntity {
         this.itemLabel = itemLabel;
     }
 
-
-
-    public List<Sickness> getSicknessList() {
-        return sicknessList;
-    }
-
-    public void setSicknessList(List<Sickness> sicknessList) {
-        this.sicknessList = sicknessList;
-    }
 
     public long getEntryId() {
         return entryId;
@@ -90,7 +74,7 @@ public class CheckEntryItem extends IncrementEntity {
         this.bigValue = bigValue;
     }
 
-    public String getAnalysis() {
+/*    public String getAnalysis() {
         return analysis;
     }
 
@@ -112,7 +96,7 @@ public class CheckEntryItem extends IncrementEntity {
 
     public void setLifeGuidance(String lifeGuidance) {
         this.lifeGuidance = lifeGuidance;
-    }
+    }*/
 
     public String getClinicDepartment() {
         return clinicDepartment;
