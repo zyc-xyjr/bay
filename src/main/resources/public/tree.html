@@ -308,8 +308,10 @@
                         </div>
                         <div class="am-form-group">
                             <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">新增</button>
-                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">删除</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">新增检查项</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">删除检查项</button>
+                                <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">添加异常解析</button>
+
                             </div>
                         </div>
                     </div>
@@ -362,6 +364,71 @@
                                 </div>
                             </div>
                         </form>
+                        <form id="itemForm" class="am-form tpl-form-border-form tpl-form-border-br">
+                            <input type="hidden" class="tpl-form-input" id="entryId"  name="entryId" >
+                            <div class="am-form-group">
+                                <label for="itemLabel" class="am-u-sm-3 am-form-label">异常标签 <span class="tpl-form-line-small-title">Label</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="itemLabel"  name="itemLabel" placeholder="请输入异常名称,例:中度偏低">
+                                    <small>请填写异常名称</small>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label for="smallValue" class="am-u-sm-3 am-form-label">参考值下限 <span class="tpl-form-line-small-title">Min</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="smallValue" name="smallValue" placeholder="请输入参考值">
+                                    <small>请输入参考值。</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="bigValue" class="am-u-sm-3 am-form-label">参考值上限 <span class="tpl-form-line-small-title">Max</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="bigValue" name="bigValue" placeholder="请输入参考值">
+                                    <small>请输入参考值。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="analysis" class="am-u-sm-3 am-form-label">异常指标解析  <span class="tpl-form-line-small-title">Analysis</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="analysis" name="analysis" placeholder="请输入异常指标解析">
+                                    <small>请输入异常指标解析。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="medicalAdvice" class="am-u-sm-3 am-form-label">诊疗建议  <span class="tpl-form-line-small-title">Advice</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="medicalAdvice" name="medicalAdvice" placeholder="请输入诊疗建议">
+                                    <small>请输入诊疗建议。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="lifeGuidance" class="am-u-sm-3 am-form-label">生活指导  <span class="tpl-form-line-small-title">Guidance</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="lifeGuidance" name="lifeGuidance" placeholder="请输入生活指导">
+                                    <small>请输入生活指导。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="clinicDepartment" class="am-u-sm-3 am-form-label">就诊科室  <span class="tpl-form-line-small-title">Department</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="clinicDepartment" name="clinicDepartment" placeholder="请输入就诊科室">
+                                    <small>请输入就诊科室。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">提交</button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

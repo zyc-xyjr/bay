@@ -24,7 +24,7 @@ public class CheckEntryItem extends IncrementEntity {
     @Column(name = "big_value")
     private float bigValue;
 
-/*    //异常解析
+    //异常解析
     @Column(name = "analysis")
     private String analysis;
 
@@ -36,7 +36,7 @@ public class CheckEntryItem extends IncrementEntity {
     @Column(name = "life_guidance")
     private String lifeGuidance;
 
-    @Column(name = "clinic_department")*/
+    @Column(name = "clinic_department")
     private String clinicDepartment;
 
 
@@ -74,7 +74,7 @@ public class CheckEntryItem extends IncrementEntity {
         this.bigValue = bigValue;
     }
 
-/*    public String getAnalysis() {
+    public String getAnalysis() {
         return analysis;
     }
 
@@ -96,7 +96,7 @@ public class CheckEntryItem extends IncrementEntity {
 
     public void setLifeGuidance(String lifeGuidance) {
         this.lifeGuidance = lifeGuidance;
-    }*/
+    }
 
     public String getClinicDepartment() {
         return clinicDepartment;
