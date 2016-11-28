@@ -1,4 +1,4 @@
-package com.bm.service.impl;
+package com.bm.service;
 
 import com.bm.entity.CheckEntry;
 import com.bm.entity.CheckEntryItem;

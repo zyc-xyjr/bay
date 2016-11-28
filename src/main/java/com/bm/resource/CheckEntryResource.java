@@ -2,12 +2,11 @@ package com.bm.resource;
 
 import com.bm.entity.CheckEntry;
 import com.bm.entity.CheckEntryItem;
-import com.bm.entity.EntryItemPathogen;
 import com.bm.entity.Pathogen;
 import com.bm.model.ResultModel;
 import com.bm.service.CheckEntryService;
 import com.bm.service.PathogenService;
-import com.bm.service.impl.CheckEntryItemService;
+import com.bm.service.CheckEntryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.logging.Logger;
 

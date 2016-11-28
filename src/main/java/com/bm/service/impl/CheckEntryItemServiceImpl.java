@@ -2,6 +2,7 @@ package com.bm.service.impl;
 
 import com.bm.dao.CheckEntryItemDao;
 import com.bm.entity.CheckEntryItem;
+import com.bm.service.CheckEntryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

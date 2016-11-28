@@ -26,9 +26,9 @@ public class CheckResult extends IncrementEntity {
     @Column(name = "check_value")
     private Float checkValue;
 
-    //偏高 偏低
-    @Column(name = "result")
-    private String result;
+    //异常情况
+    @Column(name = "item_id")
+    private String itemId;
 
     public Long getHealthFormId() {
         return healthFormId;
@@ -54,12 +54,12 @@ public class CheckResult extends IncrementEntity {
         this.checkValue = checkValue;
     }
 
-    public String getResult() {
-        return result;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 }
 
