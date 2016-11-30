@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface CheckEntryService {
 
-    void saveCheckEntry(CheckEntry checkEntry);
+    CheckEntry saveCheckEntry(CheckEntry checkEntry);
 
     List<CheckEntry> findAllCheckEntry();
 

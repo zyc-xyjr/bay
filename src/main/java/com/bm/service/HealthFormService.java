@@ -14,4 +14,6 @@ public interface HealthFormService {
     List<HealthForm> findAll(Long userId);
 
     List<HealthForm> findByStatus(Long userId,String status);
+
+    HealthForm getById(Long id);
 }

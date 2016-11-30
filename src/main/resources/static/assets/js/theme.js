@@ -76,7 +76,7 @@ function postRequest(u,d,func){
             console.log("post request success...");
             if (data.status==0){
                 console.log("执行回调函数...");
-                func();
+                alert("提交成功");
             } else {
                 console.log("请求失败,提示错误信息..."+data.msg);
                 alert(data.msg);

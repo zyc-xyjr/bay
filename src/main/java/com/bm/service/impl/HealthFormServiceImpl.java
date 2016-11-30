@@ -31,4 +31,9 @@ public class HealthFormServiceImpl implements HealthFormService {
     public List<HealthForm> findByStatus(Long userId, String status) {
         return healthFormDao.findByStatus(userId,status);
     }
+
+    @Override
+    public HealthForm getById(Long id) {
+        return healthFormDao.findOne(id);
+    }
 }

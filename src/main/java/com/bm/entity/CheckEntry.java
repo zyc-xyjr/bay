@@ -21,10 +21,10 @@ public class CheckEntry extends IncrementEntity {
     private String entryKey;
 
     @Column(name = "normal_min_value")
-    private String normalMinValue;
+    private Float normalMinValue;
 
     @Column(name = "normal_max_value")
-    private String normalMaxValue;
+    private Float normalMaxValue;
 
     @Column(name = "normal_value")
     private String normalValue;
@@ -66,19 +66,19 @@ public class CheckEntry extends IncrementEntity {
         this.normalValue = normalValue;
     }
 
-    public String getNormalMinValue() {
+    public Float getNormalMinValue() {
         return normalMinValue;
     }
 
-    public void setNormalMinValue(String normalMinValue) {
+    public void setNormalMinValue(Float normalMinValue) {
         this.normalMinValue = normalMinValue;
     }
 
-    public String getNormalMaxValue() {
+    public Float getNormalMaxValue() {
         return normalMaxValue;
     }
 
-    public void setNormalMaxValue(String normalMaxValue) {
+    public void setNormalMaxValue(Float normalMaxValue) {
         this.normalMaxValue = normalMaxValue;
     }
 

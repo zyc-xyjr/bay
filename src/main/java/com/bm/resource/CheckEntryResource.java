@@ -111,7 +111,12 @@ public class CheckEntryResource {
     @RequestMapping("/checkEntry/ajax/save")
     @ResponseBody
     public ResultModel saveCheckEntry(CheckEntry checkEntry){
-        checkEntryService.saveCheckEntry(checkEntry);
+        checkEntry = checkEntryService.saveCheckEntry(checkEntry);
+        CheckEntryItem checkEntryItem = new CheckEntryItem();
+        checkEntryItem.setBigValue(checkEntry.getNormalMaxValue());
+        checkEntryItem.setSmallValue(checkEntry.getNormalMinValue());
+        checkEntryItem.setEntryId(checkEntry.getId());
+        checkEntryItem.setItemLabel("正常");
         return new ResultModel(0,"success",new LinkedHashMap());
     }
 }

@@ -14,7 +14,8 @@ public class ResourceException {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResultModel exception(){
-       return  new ResultModel(1,"系统异常错误！",null);
+    public ResultModel exception(Exception exception){
+        exception.printStackTrace();
+        return  new ResultModel(1,"系统异常错误",null);
     }
 }

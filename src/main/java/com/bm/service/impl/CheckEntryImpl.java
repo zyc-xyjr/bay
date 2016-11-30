@@ -22,8 +22,8 @@ public class CheckEntryImpl implements CheckEntryService {
     private CheckEntryDao checkEntryDao;
 
     @Override
-    public void saveCheckEntry(CheckEntry checkEntry) {
-        checkEntryDao.save(checkEntry);
+    public CheckEntry saveCheckEntry(CheckEntry checkEntry) {
+        return checkEntryDao.save(checkEntry);
     }
 
     @Override
