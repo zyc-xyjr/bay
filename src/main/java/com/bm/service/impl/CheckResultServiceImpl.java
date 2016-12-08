@@ -29,6 +29,11 @@ public class CheckResultServiceImpl implements CheckResultService {
 
     @Override
     public void saveCheckResult(CheckResult checkResult) {
+        checkResultDao.save(checkResult);
+    }
 
+    @Override
+    public CheckResult getCheckResult(Long healthFormId, Long entryId) {
+        return checkResultDao.getCheckResult(healthFormId,entryId);
     }
 }

@@ -3,6 +3,8 @@ package com.bm.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/9/18.
@@ -23,6 +25,12 @@ public class HealthForm extends IncrementEntity {
     @Column(name = "file_path")
     private String filePath;
 
+    private String viewPath;
+
+    @Column(name = "upload_time")
+    private Date uploadTime;
+
+    //init未处理 processing处理中 complete已处理
     @Column(name = "status")
     private String status;
 
@@ -64,5 +72,21 @@ public class HealthForm extends IncrementEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getViewPath() {
+        return "/healForm/picture/"+getId();
+    }
+
+    public void setViewPath(String viewPath) {
+        this.viewPath = viewPath;
+    }
+
+    public Date getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(Date uploadTime) {
+        this.uploadTime = uploadTime;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -31,9 +32,9 @@ public class FileResource {
 
     @Autowired
     private HealthFormService healthFormService;
+
     /**
      * 上传材料
-     *
      * @param request
      * @return
      */
@@ -55,13 +56,15 @@ public class FileResource {
                 if (!targetDir.exists()) {
                     targetDir.mkdirs();
                 }
-                File targetFile = new File(filePath+userId+File.separator+System.currentTimeMillis()+"."+suffix);
+                String fileName = System.currentTimeMillis()+"";
+                File targetFile = new File(filePath+userId+File.separator+fileName+"."+suffix);
                 if (!targetFile.exists()){
                     targetFile.createNewFile();
                 }
                 file.transferTo(targetFile);
                 HealthForm healthForm = new HealthForm();
-                healthForm.setFilePath(filePath+userId+File.separator+System.currentTimeMillis()+"."+suffix);
+                healthForm.setFilePath(filePath+userId+File.separator+fileName+"."+suffix);
+                healthForm.setUploadTime(new Date());
                 healthForm.setUserId(Long.valueOf(userId));
                 healthFormService.saveHelthForm(healthForm);
             } catch (IOException e) {
@@ -76,18 +79,14 @@ public class FileResource {
 
     /**
      * 下载材料
-     *
      * @return
      */
-    @RequestMapping({"/cou/material/download/{id}"})
+    @RequestMapping({"/healthForm/picture/{id}"})
     @ApiOperation(value = "图片下载",httpMethod = "GET")
     public void downloadMaterial(@PathVariable("id") Long id, HttpServletResponse response) {
 
-
-
-        String filePath = "";
-
-        File file = new File(filePath);
+        HealthForm healthForm = healthFormService.getById(id);
+        File file = new File(healthForm.getFilePath());
 
         //设置response的编码方式
         response.setContentType("application/x-msdownload");

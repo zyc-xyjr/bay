@@ -28,7 +28,7 @@ public class CheckResult extends IncrementEntity {
 
     //异常情况
     @Column(name = "item_id")
-    private String itemId;
+    private Long itemId;
 
     public Long getHealthFormId() {
         return healthFormId;
@@ -54,11 +54,11 @@ public class CheckResult extends IncrementEntity {
         this.checkValue = checkValue;
     }
 
-    public String getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 }

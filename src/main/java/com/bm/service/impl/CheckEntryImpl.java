@@ -22,8 +22,8 @@ public class CheckEntryImpl implements CheckEntryService {
     private CheckEntryDao checkEntryDao;
 
     @Override
-    public void saveCheckEntry(CheckEntry checkEntry) {
-        checkEntryDao.save(checkEntry);
+    public CheckEntry saveCheckEntry(CheckEntry checkEntry) {
+        return checkEntryDao.save(checkEntry);
     }
 
     @Override
@@ -52,5 +52,10 @@ public class CheckEntryImpl implements CheckEntryService {
     public void batchDelCheckEntry(List<Long> ids) {
         List<CheckEntry> checkEntries =(List<CheckEntry>) this.checkEntryDao.findAll(ids);
         this.checkEntryDao.delete(checkEntries);
+    }
+
+    @Override
+    public CheckEntry findOne(Long id) {
+        return checkEntryDao.findOne(id);
     }
 }

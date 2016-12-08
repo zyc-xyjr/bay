@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface CheckEntryService {
 
-    void saveCheckEntry(CheckEntry checkEntry);
+    CheckEntry saveCheckEntry(CheckEntry checkEntry);
 
     List<CheckEntry> findAllCheckEntry();
 
@@ -21,4 +21,6 @@ public interface CheckEntryService {
     Page<CheckEntry> pageAllCheckEntry(int pageNo, int pageSize);
 
     void batchDelCheckEntry(List<Long> ids);
+
+    CheckEntry findOne(Long id);
 }

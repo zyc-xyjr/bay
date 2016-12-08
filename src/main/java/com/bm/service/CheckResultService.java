@@ -14,4 +14,6 @@ public interface CheckResultService {
     void batchSaveCheckResult(List<CheckResult> checkResultList);
 
     void saveCheckResult(CheckResult checkResult);
+
+    CheckResult getCheckResult(Long healthFormId , Long entryId );
 }
