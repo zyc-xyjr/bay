@@ -21,4 +21,6 @@ public interface CheckEntryService {
     Page<CheckEntry> pageAllCheckEntry(int pageNo, int pageSize);
 
     void batchDelCheckEntry(List<Long> ids);
+
+    CheckEntry findOne(Long id);
 }

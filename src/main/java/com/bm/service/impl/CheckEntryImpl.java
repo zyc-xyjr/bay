@@ -53,4 +53,9 @@ public class CheckEntryImpl implements CheckEntryService {
         List<CheckEntry> checkEntries =(List<CheckEntry>) this.checkEntryDao.findAll(ids);
         this.checkEntryDao.delete(checkEntries);
     }
+
+    @Override
+    public CheckEntry findOne(Long id) {
+        return checkEntryDao.findOne(id);
+    }
 }

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" href="assets/css/zTreeStyle.css">
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.ztree.core.min.js"></script>.
+    <script src="assets/js/jquery.ztree.core.min.js"></script>
     <script src="assets/js/jquery.ztree.excheck.min.js"></script>
     <script src="assets/js/jquery.ztree.exedit.min.js"></script>
 
@@ -41,29 +41,59 @@
         }
         $(document).ready(function(){
             $("#itemForm").hide();
-            baseRequest("http://localhost/admin/dictionary/checkEntry/list","GET","json",initTree);
+            baseRequest("http://115.28.184.79/admin/dictionary/checkEntry/list","GET","json",initTree);
         });
 
         //重置表单
         function resetForm(){
-            $("#form").reset();
+            var zTree = $.fn.zTree.getZTreeObj("tree");
+            var selNode = zTree.getSelectedNodes();
+            if (selNode == null || selNode == undefined || selNode.length == 0){
+                $("#parentId").val("");
+            }else {
+                if (selNode[0].isParent){
+                    $("#parentId").val(selNode[0].id);
+                }
+            }
+            $("#id").val("");
+            $("#entryKey").val("");
+            $("#entryName").val("");
+            $("#normalMinValue").val("");
+            $("#normalMaxValue").val("");
+            $("#unit").val("");
+            $("#form").show();
+            $("#itemForm").hide();
         }
         //删除检查项
         function delEntry(){
-
+            var zTree = $.fn.zTree.getZTreeObj("tree");
+            var selNode = zTree.getSelectedNodes();
+            if (selNode == null || selNode == undefined || selNode.length == 0){
+                alert("请选择检查项！")
+            }else {
+                baseRequest("http://115.28.184.79/admin/dictionary/checkEntry/ajax/del?entryId="+selNode[0].id,"GET","json",initTree);
+            }
         }
         //增加异常解析
         function addItem(){
             var zTree = $.fn.zTree.getZTreeObj("tree");
             var selNode = zTree.getSelectedNodes();
-            console.log(selNode);
-            $("#form").hide();
-            $("#itemForm").show();
+            if (selNode == null || selNode == undefined || selNode.length == 0){
+                alert("请选择检查项！")
+            }else {
+                $("#entryId").val(selNode[0].id);
+                $("#form").hide();
+                $("#itemForm").show();
+            }
         }
 
         //异步提交表单
         function submitForm(){
-           postRequest("http://localhost/admin/dictionary/checkEntry/ajax/save",$("#form").serialize());
+           postRequest("http://115.28.184.79/admin/dictionary/checkEntry/ajax/save",$("#form").serialize());
+        }
+        //异步提交异常解析表单
+        function submitItemForm(){
+            postRequest("http://115.28.184.79/admin/item/save",$("#itemForm").serialize());
         }
     </script>
     <div class="am-g tpl-g">
@@ -444,7 +474,7 @@
 
                             <div class="am-form-group">
                                 <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitForm();">提交</button>
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="submitItemForm();">提交</button>
                                 </div>
                             </div>
                         </form>

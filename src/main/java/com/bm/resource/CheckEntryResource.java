@@ -7,6 +7,7 @@ import com.bm.model.ResultModel;
 import com.bm.service.CheckEntryService;
 import com.bm.service.PathogenService;
 import com.bm.service.CheckEntryItemService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -104,6 +105,7 @@ public class CheckEntryResource {
 
     @RequestMapping("/checkEntry/ajax/all")
     @ResponseBody
+    @ApiOperation(value = "检查项数据字典列表",httpMethod = "GET")
     public List<CheckEntry> checkEntryAjaxAll(){
         return checkEntryService.findAllCheckEntry();
     }
@@ -118,5 +120,14 @@ public class CheckEntryResource {
         checkEntryItem.setEntryId(checkEntry.getId());
         checkEntryItem.setItemLabel("正常");
         return new ResultModel(0,"success",new LinkedHashMap());
+    }
+
+
+    @RequestMapping("/checkEntry/ajax/del")
+    @ResponseBody
+    public ResultModel delCheckEntry(Long entryId){
+        checkEntryService.removeCheckEntry(entryId);
+        List<CheckEntry> checkEntries=checkEntryService.findAllCheckEntry();
+        return new ResultModel(0,"success",new LinkedHashMap()).put("checkEntryList",checkEntries);
     }
 }

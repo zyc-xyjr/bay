@@ -16,4 +16,7 @@ public interface HealthFormDao extends PagingAndSortingRepository<HealthForm,Lon
 
     @Query(value = "select u from HealthForm u where u.userId=?1 and u.status=?2")
     List<HealthForm> findByStatus(Long userId,String status);
+
+    @Query(value = "select u from HealthForm u where u.status=?1")
+    List<HealthForm> findByStatus(String status);
 }

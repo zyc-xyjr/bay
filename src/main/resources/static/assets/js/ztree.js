@@ -39,6 +39,8 @@ var check_setting = {
             $("#normalMinValue").val(treeNode.normalMinValue);
             $("#normalMaxValue").val(treeNode.normalMaxValue);
             $("#unit").val(treeNode.unit);
+            $("#form").show();
+            $("#itemForm").hide();
         }
     }
 };

@@ -5,6 +5,7 @@ import com.bm.entity.HealthForm;
 import com.bm.service.HealthFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.NumberUtils;
 
 import java.util.List;
 
@@ -29,11 +30,20 @@ public class HealthFormServiceImpl implements HealthFormService {
 
     @Override
     public List<HealthForm> findByStatus(Long userId, String status) {
-        return healthFormDao.findByStatus(userId,status);
+        if (userId!=0l){
+            return healthFormDao.findByStatus(userId,status);
+        }else {
+            return healthFormDao.findByStatus(status);
+        }
     }
 
     @Override
     public HealthForm getById(Long id) {
         return healthFormDao.findOne(id);
+    }
+
+    @Override
+    public List<HealthForm> findByStatus(String status) {
+        return healthFormDao.findByStatus(status);
     }
 }
