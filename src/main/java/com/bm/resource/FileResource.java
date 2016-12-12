@@ -64,6 +64,7 @@ public class FileResource {
                 file.transferTo(targetFile);
                 HealthForm healthForm = new HealthForm();
                 healthForm.setFilePath(filePath+userId+File.separator+fileName+"."+suffix);
+                healthForm.setStatus("init");
                 healthForm.setUploadTime(new Date());
                 healthForm.setUserId(Long.valueOf(userId));
                 healthFormService.saveHelthForm(healthForm);
@@ -87,9 +88,11 @@ public class FileResource {
 
         HealthForm healthForm = healthFormService.getById(id);
         File file = new File(healthForm.getFilePath());
+//        File file = new File(filePath+"111"+File.separator+"1476536381693.png");
 
         //设置response的编码方式
-        response.setContentType("application/x-msdownload");
+        /*response.setContentType("application/x-msdownload");*/
+        response.setContentType("application/*");
 
         //写明要下载的文件的大小
         response.setContentLength((int) file.length());

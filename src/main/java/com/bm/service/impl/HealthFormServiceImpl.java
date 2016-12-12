@@ -25,12 +25,15 @@ public class HealthFormServiceImpl implements HealthFormService {
 
     @Override
     public List<HealthForm> findAll(Long userId) {
+        if (userId==null||userId==0l){
+            return (List<HealthForm>) healthFormDao.findAll();
+        }
         return healthFormDao.findAll(userId);
     }
 
     @Override
     public List<HealthForm> findByStatus(Long userId, String status) {
-        if (userId!=0l){
+        if (userId!=null&&userId!=0l){
             return healthFormDao.findByStatus(userId,status);
         }else {
             return healthFormDao.findByStatus(status);

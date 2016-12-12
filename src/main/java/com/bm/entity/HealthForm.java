@@ -34,6 +34,22 @@ public class HealthForm extends IncrementEntity {
     @Column(name = "status")
     private String status;
 
+
+    //异常解析
+    @Column(name = "analysis")
+    private String analysis;
+
+    //医学建议
+    @Column(name = "medical_advice")
+    private String medicalAdvice;
+
+    //生活指导
+    @Column(name = "life_guidance")
+    private String lifeGuidance;
+
+    @Column(name = "clinic_department")
+    private String clinicDepartment;
+
     public Long getUserId() {
         return userId;
     }
@@ -88,5 +104,37 @@ public class HealthForm extends IncrementEntity {
 
     public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
+    }
+
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis;
+    }
+
+    public String getMedicalAdvice() {
+        return medicalAdvice;
+    }
+
+    public void setMedicalAdvice(String medicalAdvice) {
+        this.medicalAdvice = medicalAdvice;
+    }
+
+    public String getLifeGuidance() {
+        return lifeGuidance;
+    }
+
+    public void setLifeGuidance(String lifeGuidance) {
+        this.lifeGuidance = lifeGuidance;
+    }
+
+    public String getClinicDepartment() {
+        return clinicDepartment;
+    }
+
+    public void setClinicDepartment(String clinicDepartment) {
+        this.clinicDepartment = clinicDepartment;
     }
 }

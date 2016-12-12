@@ -209,5 +209,15 @@ public class UserResource {
         return new ResultModel(0,"success",new LinkedHashMap()).put("userList",userService.findAll());
     }
 
+    /**
+     * 查询用户个人信息
+     * @return
+     */
+    @RequestMapping("/info/myself")
+    @ResponseBody
+    @ApiOperation(value = "查询用户个人信息",httpMethod = "GET")
+    public ResultModel getUserInfo( @ApiParam(required = true,name = "userId",value = "用户id")Long userId){
+        return new ResultModel(0,"success",new LinkedHashMap()).put("user",userService.getById(userId));
+    }
 
 }
