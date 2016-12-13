@@ -43,7 +43,7 @@ public class HealthFormResource {
     @RequestMapping("/update")
     @ResponseBody
     @ApiOperation(value = "修改体检单检查结果",httpMethod = "POST")
-    public ResultModel updateHealthForm(@ApiParam(required = true,name = "healthFormId",value = "体检单ID") Long formId,
+    public ResultModel updateHealthForm(@ApiParam(required = true,name = "formId",value = "体检单ID") Long formId,
                                         @ApiParam(required = true,name = "analysis",value = "异常解析")String analysis,
                                         @ApiParam(required = true,name = "clinicDepartment",value = "就诊科室")String clinicDepartment,
                                         @ApiParam(required = true,name = "medicalAdvice",value = "医学建议")String medicalAdvice,
@@ -53,6 +53,7 @@ public class HealthFormResource {
         healthForm.setClinicDepartment(clinicDepartment);
         healthForm.setMedicalAdvice(medicalAdvice);
         healthForm.setLifeGuidance(lifeGuidance);
+        healthForm.setStatus("complete");
         healthFormService.saveHelthForm(healthForm);
         return new ResultModel(0,"success",new LinkedHashMap());
     }

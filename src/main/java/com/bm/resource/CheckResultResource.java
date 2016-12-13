@@ -1,5 +1,7 @@
 package com.bm.resource;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.bm.entity.CheckEntryItem;
 import com.bm.entity.CheckResult;
 import com.bm.entity.CheckResultList;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -48,7 +51,7 @@ public class CheckResultResource {
     @RequestMapping("/check")
     @ResponseBody
     @ApiOperation(value = "检查项诊断",httpMethod = "POST")
-    public ResultModel getCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
+    public ResultModel doCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
                                            @ApiParam(required = true,name = "entryId",value = "检查项ID")Long entryId,
                                            @ApiParam(required = true,name = "checkValue",value = "实际检查值")Float checkValue){
 
@@ -67,10 +70,10 @@ public class CheckResultResource {
                     }
                     checkResult.setCheckValue(checkValue);
                     checkResult.setItemId(checkEntryItem.getId());
-                    checkResult.setClinicDepartment(checkEntryItem.getClinicDepartment());
+                 /*   checkResult.setClinicDepartment(checkEntryItem.getClinicDepartment());
                     checkResult.setLifeGuidance(checkEntryItem.getLifeGuidance());
                     checkResult.setMedicalAdvice(checkEntryItem.getMedicalAdvice());
-                    checkResult.setAnalysis(checkEntryItem.getAnalysis());
+                    checkResult.setAnalysis(checkEntryItem.getAnalysis());*/
                     checkResultService.saveCheckResult(checkResult);
                     return new ResultModel(0,"success",new LinkedHashMap()).put("checkResult",checkResult);
             }
@@ -82,14 +85,16 @@ public class CheckResultResource {
     @RequestMapping("/checkAll")
     @ResponseBody
     @ApiOperation(value = "检查项诊断",httpMethod = "POST")
-    public ResultModel getCheckResultList( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
+    public ResultModel doAllCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
                                            @ApiParam(required = true,name = "checkResultStrs",value = "检查项和检查结果数组字符串")String checkResultStrs){
 
-
-        Gson gson = new Gson();
-        CheckResultList checkResultList = gson.fromJson(checkResultStrs, CheckResultList.class);
-        List<CheckResult> checkResults = checkResultList.getCheckResultList();
-
+        List jsonList = (List) JSON.parse(checkResultStrs);
+        List<CheckResult> checkResults = new ArrayList<>(jsonList.size());
+        if (jsonList!=null&&jsonList.size()>0){
+            for (Object obj : jsonList) {
+                checkResults.add(JSONObject.parseObject(obj.toString(), CheckResult.class));
+            }
+        }
 
         StringBuffer s1 = new StringBuffer();
         StringBuffer s2 = new StringBuffer();
@@ -103,17 +108,17 @@ public class CheckResultResource {
                 for (CheckEntryItem checkEntryItem : checkEntryItemList){
                     if (checkResult.getCheckValue()<checkEntryItem.getBigValue()&&checkResult.getCheckValue()>checkEntryItem.getSmallValue()){
 
-                       /*   CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
+                        CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
                         if (result==null){
                             result = checkResult;
                         }
                         result.setCheckValue(checkResult.getCheckValue());
                         result.setItemId(checkEntryItem.getId());
-                        result.setClinicDepartment(checkEntryItem.getClinicDepartment());
+          /*              result.setClinicDepartment(checkEntryItem.getClinicDepartment());
                         result.setLifeGuidance(checkEntryItem.getLifeGuidance());
                         result.setMedicalAdvice(checkEntryItem.getMedicalAdvice());
-                        result.setAnalysis(checkEntryItem.getAnalysis());
-                        checkResultService.saveCheckResult(result);*/
+                        result.setAnalysis(checkEntryItem.getAnalysis());*/
+                        checkResultService.saveCheckResult(result);
                         s1.append(checkEntryItem.getClinicDepartment());
                         s2.append(checkEntryItem.getLifeGuidance());
                         s3.append(checkEntryItem.getMedicalAdvice());
@@ -133,4 +138,15 @@ public class CheckResultResource {
         return new ResultModel(0,"success",new LinkedHashMap()).put("healthForm",healthForm);
     }
 
+
+    @RequestMapping("/query")
+    @ResponseBody
+    @ApiOperation(value = "查询诊断结果",httpMethod = "GET")
+    public ResultModel getCheckResults( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId){
+
+        return new ResultModel(0,"success",new LinkedHashMap()).
+                put("resultList",checkResultService.getCheckResultList(healthFormId)).
+                put("healthForm",healthFormService.getById(healthFormId));
+
+    }
 }

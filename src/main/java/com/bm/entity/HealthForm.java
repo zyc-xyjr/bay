@@ -91,7 +91,7 @@ public class HealthForm extends IncrementEntity {
     }
 
     public String getViewPath() {
-        return "/healForm/picture/"+getId();
+        return "/healthForm/picture/"+getId();
     }
 
     public void setViewPath(String viewPath) {

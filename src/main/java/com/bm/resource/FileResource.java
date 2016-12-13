@@ -88,23 +88,7 @@ public class FileResource {
 
         HealthForm healthForm = healthFormService.getById(id);
         File file = new File(healthForm.getFilePath());
-//        File file = new File(filePath+"111"+File.separator+"1476536381693.png");
 
-        //设置response的编码方式
-        /*response.setContentType("application/x-msdownload");*/
-        response.setContentType("application/*");
-
-        //写明要下载的文件的大小
-        response.setContentLength((int) file.length());
-        String fileName = "";
-        //设置附加文件名
-        //response.setHeader("Content-Disposition","attachment;filename="+fileName);
-        //解决中文乱码
-        try {
-            response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes("gbk"), "iso-8859-1"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
         //读出文件到i/o流
         FileInputStream fis = null;
         try {
