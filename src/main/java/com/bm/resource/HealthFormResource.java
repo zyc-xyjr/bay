@@ -36,7 +36,7 @@ public class HealthFormResource {
     @ResponseBody
     @ApiOperation(value = "根据状态查询体检单列表",httpMethod = "GET")
     public ResultModel getHealthFormsByStatus(@ApiParam(required = false,name = "userId",value = "用户ID")@RequestParam(required = false) Long userId,
-                                              @ApiParam(required = true,name = "status",value = "状态（init未处理 processing处理中 complete已处理）")String status){
+                                              @ApiParam(required = true,name = "status",value = "状态（init未处理 processing处理中 complete已处理 unhandled处理中和未处理的）")String status){
         return new ResultModel(0,"success",new LinkedHashMap()).put("healthFormList",healthFormService.findByStatus(userId,status));
     }
 

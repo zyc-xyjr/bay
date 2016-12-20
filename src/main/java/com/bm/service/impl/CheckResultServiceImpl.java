@@ -28,8 +28,8 @@ public class CheckResultServiceImpl implements CheckResultService {
     }
 
     @Override
-    public void saveCheckResult(CheckResult checkResult) {
-        checkResultDao.save(checkResult);
+    public CheckResult saveCheckResult(CheckResult checkResult) {
+        return checkResultDao.save(checkResult);
     }
 
     @Override

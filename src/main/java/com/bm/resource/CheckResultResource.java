@@ -88,6 +88,7 @@ public class CheckResultResource {
     public ResultModel doAllCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
                                            @ApiParam(required = true,name = "checkResultStrs",value = "检查项和检查结果数组字符串")String checkResultStrs){
 
+        checkResultStrs="[\n  {\n    \"entryId\" : \"17\",\n    \"checkValue\" : \"85.7\"\n  }\n]";
         List jsonList = (List) JSON.parse(checkResultStrs);
         List<CheckResult> checkResults = new ArrayList<>(jsonList.size());
         if (jsonList!=null&&jsonList.size()>0){
@@ -103,22 +104,17 @@ public class CheckResultResource {
 
         for (CheckResult checkResult:checkResults){
             checkResult.setHealthFormId(healthFormId);
+            CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
+            if (result!=null){
+                checkResult.setId(result.getId());
+            }
+            checkResultService.saveCheckResult(checkResult);
             List<CheckEntryItem> checkEntryItemList = checkEntryItemService.entryItemsByEntryId(checkResult.getEntryId());
             if (checkEntryItemList!=null&&checkEntryItemList.size()>0){
                 for (CheckEntryItem checkEntryItem : checkEntryItemList){
                     if (checkResult.getCheckValue()<checkEntryItem.getBigValue()&&checkResult.getCheckValue()>checkEntryItem.getSmallValue()){
-
-                        CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
-                        if (result==null){
-                            result = checkResult;
-                        }
-                        result.setCheckValue(checkResult.getCheckValue());
-                        result.setItemId(checkEntryItem.getId());
-          /*              result.setClinicDepartment(checkEntryItem.getClinicDepartment());
-                        result.setLifeGuidance(checkEntryItem.getLifeGuidance());
-                        result.setMedicalAdvice(checkEntryItem.getMedicalAdvice());
-                        result.setAnalysis(checkEntryItem.getAnalysis());*/
-                        checkResultService.saveCheckResult(result);
+                      /*  checkResult.setItemId(checkEntryItem.getId());
+                        checkResultService.saveCheckResult(checkResult);*/
                         s1.append(checkEntryItem.getClinicDepartment());
                         s2.append(checkEntryItem.getLifeGuidance());
                         s3.append(checkEntryItem.getMedicalAdvice());
