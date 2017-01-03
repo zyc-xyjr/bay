@@ -26,9 +26,9 @@ import java.util.List;
 public class PushServiceImpl implements PushService {
 
     //定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
-    private static String appId = "V1HntleeBs9u1J8yyHvH66";
-    private static String appKey = "fZcfe8oK6V7Xl6G5vQyWy1";
-    private static String masterSecret = "dhRafIPB279QCTqqCmZ3v1";
+    private static String appId = "IsFSehlHjE80BUUGfPJk19";
+    private static String appKey = "ST5SiK5ESv61Dj6houQ9H9";
+    private static String masterSecret = "C5VNlljpS1AFnHxnV7pD57";
     private static String url = "http://sdk.open.api.igexin.com/apiex.htm";
 
     @Autowired
