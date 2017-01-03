@@ -5,19 +5,17 @@ import com.bm.entity.Relations;
 import com.bm.model.ResultModel;
 import com.bm.service.PushService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.hateoas.core.Relation;
+
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin2.util.SystemUtil;
+
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+
 
 /**
  * Created by Administrator on 2016/12/15.

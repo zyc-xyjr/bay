@@ -47,9 +47,6 @@ public class PushServiceImpl implements PushService {
         template.setAppId(appId);
         template.setAppkey(appKey);
         if(msg!=null){
-         /*   template.setTitle(msg.getTitle());
-            template.setText(msg.toString());
-            template.setUrl(msg.getUrl());*/
             template.setTransmissionContent(msg.toString());
         }
 
