@@ -3,11 +3,13 @@ package com.bm.resource;
 import com.bm.entity.HealthForm;
 import com.bm.model.ResultModel;
 import com.bm.service.HealthFormService;
+import com.bm.service.PushService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +35,9 @@ public class FileResource {
     @Autowired
     private HealthFormService healthFormService;
 
+    @Autowired
+    private PushService pushService;
+
     /**
      * 上传材料
      * @param request
@@ -42,6 +47,9 @@ public class FileResource {
     @ResponseBody
     @ApiOperation(value = "图片上传",httpMethod = "POST")
     public ResultModel uploadMaterial(HttpServletRequest request, @RequestParam String userId, MultipartFile file) {
+
+        String cid = request.getParameter("cid");
+        String templateId = request.getParameter("templateId");
 
         if (!file.isEmpty()) {
 
@@ -71,6 +79,10 @@ public class FileResource {
             } catch (IOException e) {
                 e.printStackTrace();
                 return new ResultModel(1,"上传图片异常",new LinkedHashMap());
+            }
+
+            if (!StringUtils.isEmpty(cid)&&!StringUtils.isEmpty(templateId)){
+                pushService.pushMsg(cid,Long.valueOf(templateId));
             }
 
         }
