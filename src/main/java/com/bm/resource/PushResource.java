@@ -37,7 +37,7 @@ public class PushResource {
             if(StringUtils.isEmpty(uid)||StringUtils.isEmpty(cid)){
 //                return SystemUtil.buildResultMap(1,false,"失败");
             }
-            List<Relations> ucRelationList =relationDao.getRelationList(uid);
+            List<Relations> ucRelationList = relationDao.getRelationList(uid);
             if(ucRelationList==null||ucRelationList.size()==0){
                 Relations ucRelation = new Relations();
                 ucRelation.setCilentId(cid);

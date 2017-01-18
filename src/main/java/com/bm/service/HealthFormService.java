@@ -18,4 +18,6 @@ public interface HealthFormService {
     List<HealthForm> findByStatus(String status);
 
     HealthForm getById(Long id);
+
+    HealthForm getByItems(String items);
 }

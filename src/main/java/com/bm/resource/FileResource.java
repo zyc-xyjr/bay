@@ -45,7 +45,7 @@ public class FileResource {
      */
     @RequestMapping({"/pic/upload"})
     @ResponseBody
-    @ApiOperation(value = "图片上传",httpMethod = "POST")
+    @ApiOperation(value = "体检表图片上传",httpMethod = "POST")
     public ResultModel uploadMaterial(HttpServletRequest request, @RequestParam String userId, MultipartFile file) {
 
         String cid = request.getParameter("cid");
@@ -91,6 +91,49 @@ public class FileResource {
     }
 
     /**
+     * 上传材料
+     * @param request
+     * @return
+     */
+    @RequestMapping({"/file/upload"})
+    @ResponseBody
+    @ApiOperation(value = "文件上传接口",httpMethod = "POST")
+    public ResultModel uploadPic(HttpServletRequest request,  MultipartFile file) {
+
+
+        if (!file.isEmpty()) {
+
+            String originalName = file.getOriginalFilename();
+
+            String contentType = file.getContentType();
+
+            String suffix = contentType.substring(contentType.lastIndexOf("/")+1);
+
+            String fileName = System.currentTimeMillis()+"";
+
+            try {
+                File targetDir = new File(filePath + "0");
+                if (!targetDir.exists()) {
+                    targetDir.mkdirs();
+                }
+
+                File targetFile = new File(filePath+"0"+File.separator+fileName+"."+suffix);
+                if (!targetFile.exists()){
+                    targetFile.createNewFile();
+                }
+                file.transferTo(targetFile);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new ResultModel(1,"上传图片异常",new LinkedHashMap());
+            }
+
+            return new ResultModel(0,"success",new LinkedHashMap()).put("url","/picture/"+fileName+"."+suffix);
+        }
+        return new ResultModel(1,"图片大小不能为空",new LinkedHashMap());
+    }
+
+    /**
      * 下载材料
      * @return
      */
@@ -100,6 +143,57 @@ public class FileResource {
 
         HealthForm healthForm = healthFormService.getById(id);
         File file = new File(healthForm.getFilePath());
+
+        //读出文件到i/o流
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedInputStream buff = new BufferedInputStream(fis);
+
+        byte[] b = new byte[1024];//相当于我们的缓存
+
+        long k = 0;//该值用于计算当前实际下载了多少字节
+
+        //从response对象中得到输出流,准备下载
+
+        OutputStream myout = null;
+        try {
+            myout = response.getOutputStream();
+
+
+            //开始循环下载
+
+            while (k < file.length()) {
+
+                int j = buff.read(b, 0, 1024);
+
+                k += j;
+
+                //将b中的数据写到客户端的内存
+
+                myout.write(b, 0, j);
+            }
+            //将写入到客户端的内存的数据,刷新到磁盘
+
+            myout.flush();
+        } catch (IOException e) {
+
+        }
+
+    }
+
+    /**
+     * 下载材料
+     * @return
+     */
+    @RequestMapping({"/picture/{fileName}"})
+    @ApiOperation(value = "文件下载",httpMethod = "GET")
+    public void downloadPic(@PathVariable String fileName, HttpServletResponse response) {
+
+        File file = new File(filePath+"0"+File.separator+fileName);
 
         //读出文件到i/o流
         FileInputStream fis = null;

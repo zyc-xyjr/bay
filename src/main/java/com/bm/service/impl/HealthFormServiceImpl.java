@@ -49,4 +49,13 @@ public class HealthFormServiceImpl implements HealthFormService {
     public List<HealthForm> findByStatus(String status) {
         return healthFormDao.findByStatus(status);
     }
+
+    @Override
+    public HealthForm getByItems(String items) {
+        List<HealthForm> healthForms = healthFormDao.findByItems(items);
+        if (healthForms!=null &&healthForms.size()>0){
+            return healthForms.get(0);
+        }
+        return null;
+    }
 }

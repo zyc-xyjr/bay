@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -88,7 +89,6 @@ public class CheckResultResource {
     public ResultModel doAllCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
                                            @ApiParam(required = true,name = "checkResultStrs",value = "检查项和检查结果数组字符串")String checkResultStrs){
 
-        checkResultStrs="[\n  {\n    \"entryId\" : \"17\",\n    \"checkValue\" : \"85.7\"\n  }\n]";
         List jsonList = (List) JSON.parse(checkResultStrs);
         List<CheckResult> checkResults = new ArrayList<>(jsonList.size());
         if (jsonList!=null&&jsonList.size()>0){
@@ -101,8 +101,10 @@ public class CheckResultResource {
         StringBuffer s2 = new StringBuffer();
         StringBuffer s3 = new StringBuffer();
         StringBuffer s4 = new StringBuffer();
-
+        StringBuffer items = new StringBuffer();
+        Long[] itemArr = new Long[checkResults.size()];
         for (CheckResult checkResult:checkResults){
+            itemArr[checkResults.indexOf(checkResult)] = checkResult.getEntryId();
             checkResult.setHealthFormId(healthFormId);
             CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
             if (result!=null){
@@ -123,13 +125,28 @@ public class CheckResultResource {
                 }
             }
         }
+
+        Arrays.sort(itemArr);
+        for (Long item:itemArr){
+            items.append(item+"_");
+        }
+
         HealthForm healthForm = healthFormService.getById(healthFormId);
         healthForm.setStatus("processing");
-
-        healthForm.setClinicDepartment(s1.toString());
-        healthForm.setLifeGuidance(s2.toString());
-        healthForm.setMedicalAdvice(s3.toString());
-        healthForm.setAnalysis(s4.toString());
+        HealthForm health = healthFormService.getByItems(items.toString());
+        if (health==null){
+            healthForm.setItems(items.toString());
+            healthForm.setClinicDepartment(s1.toString());
+            healthForm.setLifeGuidance(s2.toString());
+            healthForm.setMedicalAdvice(s3.toString());
+            healthForm.setAnalysis(s4.toString());
+        }else {
+            healthForm.setItems(items.toString());
+            healthForm.setClinicDepartment(health.getClinicDepartment());
+            healthForm.setLifeGuidance(health.getLifeGuidance());
+            healthForm.setMedicalAdvice(health.getMedicalAdvice());
+            healthForm.setAnalysis(health.getAnalysis());
+        }
         healthFormService.saveHelthForm(healthForm);
         return new ResultModel(0,"success",new LinkedHashMap()).put("healthForm",healthForm);
     }

@@ -34,6 +34,8 @@ public class HealthForm extends IncrementEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "items")
+    private String items;
 
     //异常解析
     @Column(name = "analysis")
@@ -136,5 +138,13 @@ public class HealthForm extends IncrementEntity {
 
     public void setClinicDepartment(String clinicDepartment) {
         this.clinicDepartment = clinicDepartment;
+    }
+
+    public String getItems() {
+        return items;
+    }
+
+    public void setItems(String items) {
+        this.items = items;
     }
 }
