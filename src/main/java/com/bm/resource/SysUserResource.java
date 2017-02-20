@@ -19,9 +19,9 @@ public class SysUserResource {
         HttpSession session = request.getSession();
         if(sysUser!=null&&"admin".equals(sysUser.getUsername())&&"password".equals(sysUser.getPassword())){
             session.setAttribute("sysUser",sysUser);
-            return "redirect:/admin";
+            return "redirect:/tree.html";
         }else {
-            return "login";
+            return "redirect:/login.html";
         }
     }
 }

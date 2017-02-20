@@ -10,13 +10,16 @@ import com.gexin.rp.sdk.base.IPushResult;
 import com.gexin.rp.sdk.base.impl.ListMessage;
 import com.gexin.rp.sdk.base.impl.SingleMessage;
 import com.gexin.rp.sdk.base.impl.Target;
+import com.gexin.rp.sdk.base.payload.APNPayload;
 import com.gexin.rp.sdk.http.IGtPush;
 import com.gexin.rp.sdk.template.TransmissionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -42,14 +45,28 @@ public class PushServiceImpl implements PushService {
         IGtPush push = new IGtPush(url, appKey, masterSecret);
 
         AppPushMessage msg = pushMessageDao.findOne(templateId);
+        if (ObjectUtils.isEmpty(msg)){
+            return new ResultModel(1,"缺少信息模板",new LinkedHashMap());
+        }
         // 定义"点击链接打开通知模板"，并设置标题、内容、链接
         TransmissionTemplate template = new TransmissionTemplate();
         template.setAppId(appId);
         template.setAppkey(appKey);
         if(msg!=null){
+
+            template.setTransmissionType(2);
             template.setTransmissionContent(msg.toString());
         }
-
+        APNPayload payload = new APNPayload();
+        payload.setBadge(1);
+        payload.setContentAvailable(1);
+        payload.setSound("default");
+        payload.setCategory("$由客户端定义");
+        //简单模式APNPayload.SimpleMsg
+        payload.setAlertMsg(new APNPayload.SimpleAlertMsg("hello"));
+        //字典模式使用下者
+        payload.setAlertMsg(getDictionaryAlertMsg());
+        template.setAPNInfo(payload);
         //返回结果
         IPushResult ret = null;
         if(StringUtils.isEmpty(cid)){
@@ -90,5 +107,19 @@ public class PushServiceImpl implements PushService {
             return new ResultModel(0,ret.getResponse().toString(),null);
         }
         return new ResultModel(1,"系统错误",null);
+    }
+
+    private static APNPayload.DictionaryAlertMsg getDictionaryAlertMsg(){
+        APNPayload.DictionaryAlertMsg alertMsg = new APNPayload.DictionaryAlertMsg();
+        alertMsg.setBody("您有一条新体检单");
+        alertMsg.setActionLocKey("ActionLockey");
+        alertMsg.setLocKey("LocKey");
+        alertMsg.addLocArg("loc-args");
+        alertMsg.setLaunchImage("launch-image");
+        // IOS8.2以上版本支持
+        alertMsg.setTitle("您有一条新体检单");
+        alertMsg.setTitleLocKey("TitleLocKey");
+        alertMsg.addTitleLocArg("TitleLocArg");
+        return alertMsg;
     }
 }

@@ -35,7 +35,7 @@ public class PushResource {
                                 @RequestParam String cid){
         try {
             if(StringUtils.isEmpty(uid)||StringUtils.isEmpty(cid)){
-//                return SystemUtil.buildResultMap(1,false,"失败");
+                return new ResultModel(1,"非法字段格式为空",new LinkedHashMap());
             }
             List<Relations> ucRelationList = relationDao.getRelationList(uid);
             if(ucRelationList==null||ucRelationList.size()==0){

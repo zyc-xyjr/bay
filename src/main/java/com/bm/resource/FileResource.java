@@ -81,9 +81,10 @@ public class FileResource {
                 return new ResultModel(1,"上传图片异常",new LinkedHashMap());
             }
 
-            if (!StringUtils.isEmpty(cid)&&!StringUtils.isEmpty(templateId)){
-                pushService.pushMsg(cid,Long.valueOf(templateId));
-            }
+//            if (!StringUtils.isEmpty(cid)&&!StringUtils.isEmpty(templateId)){
+//                pushService.pushMsg(cid,Long.valueOf(templateId));
+//            }
+            pushService.pushMsg("",1l);
 
         }
         return new ResultModel(0,"success",new LinkedHashMap());

@@ -19,10 +19,10 @@ public class CheckEntryItem extends IncrementEntity {
     private String itemLabel;
 
     @Column(name = "small_value")
-    private float smallValue;
+    private Float smallValue;
 
     @Column(name = "big_value")
-    private float bigValue;
+    private Float bigValue;
 
     //异常解析
     @Column(name = "analysis")
@@ -58,19 +58,19 @@ public class CheckEntryItem extends IncrementEntity {
         this.entryId = entryId;
     }
 
-    public float getSmallValue() {
+    public Float getSmallValue() {
         return smallValue;
     }
 
-    public void setSmallValue(float smallValue) {
+    public void setSmallValue(Float smallValue) {
         this.smallValue = smallValue;
     }
 
-    public float getBigValue() {
+    public Float getBigValue() {
         return bigValue;
     }
 
-    public void setBigValue(float bigValue) {
+    public void setBigValue(Float bigValue) {
         this.bigValue = bigValue;
     }
 
