@@ -129,7 +129,7 @@ public class FileResource {
                 return new ResultModel(1,"上传图片异常",new LinkedHashMap());
             }
 
-            return new ResultModel(0,"success",new LinkedHashMap()).put("url","/picture/"+fileName+"."+suffix);
+            return new ResultModel(0,"success",new LinkedHashMap()).put("url","/picture/"+fileName+"/"+suffix);
         }
         return new ResultModel(1,"图片大小不能为空",new LinkedHashMap());
     }
@@ -190,11 +190,11 @@ public class FileResource {
      * 下载材料
      * @return
      */
-    @RequestMapping({"/picture/{fileName}"})
+    @RequestMapping({"/picture/{fileName}/{suffix}"})
     @ApiOperation(value = "文件下载",httpMethod = "GET")
-    public void downloadPic(@PathVariable String fileName, HttpServletResponse response) {
+    public void downloadPic(@PathVariable String fileName,@PathVariable String suffix, HttpServletResponse response) {
 
-        File file = new File(filePath+"0"+File.separator+fileName);
+        File file = new File(filePath+"0"+File.separator+fileName+"."+suffix);
 
         //读出文件到i/o流
         FileInputStream fis = null;

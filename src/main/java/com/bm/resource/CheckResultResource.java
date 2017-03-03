@@ -85,7 +85,7 @@ public class CheckResultResource {
 
     @RequestMapping("/checkAll")
     @ResponseBody
-    @ApiOperation(value = "检查项诊断",httpMethod = "POST")
+    @ApiOperation(value = "检查项诊断",httpMethod = "GET")
     public ResultModel doAllCheckResult( @ApiParam(required = true,name = "healthFormId",value = "体检单ID")Long healthFormId,
                                            @ApiParam(required = true,name = "checkResultStrs",value = "检查项和检查结果数组字符串")String checkResultStrs){
 
@@ -133,20 +133,21 @@ public class CheckResultResource {
 
         HealthForm healthForm = healthFormService.getById(healthFormId);
         healthForm.setStatus("processing");
-        HealthForm health = healthFormService.getByItems(items.toString());
-        if (health==null){
-            healthForm.setItems(items.toString());
-            healthForm.setClinicDepartment(s1.toString());
-            healthForm.setLifeGuidance(s2.toString());
-            healthForm.setMedicalAdvice(s3.toString());
-            healthForm.setAnalysis(s4.toString());
-        }else {
-            healthForm.setItems(items.toString());
-            healthForm.setClinicDepartment(health.getClinicDepartment());
-            healthForm.setLifeGuidance(health.getLifeGuidance());
-            healthForm.setMedicalAdvice(health.getMedicalAdvice());
-            healthForm.setAnalysis(health.getAnalysis());
-        }
+        healthForm.setItems(items.toString());
+        healthForm.setClinicDepartment(s1.toString());
+        healthForm.setLifeGuidance(s2.toString());
+        healthForm.setMedicalAdvice(s3.toString());
+        healthForm.setAnalysis(s4.toString());
+//        HealthForm health = healthFormService.getByItems(items.toString());
+//        if (health==null){
+//
+//        }else {
+//            healthForm.setItems(items.toString());
+//            healthForm.setClinicDepartment(health.getClinicDepartment());
+//            healthForm.setLifeGuidance(health.getLifeGuidance());
+//            healthForm.setMedicalAdvice(health.getMedicalAdvice());
+//            healthForm.setAnalysis(health.getAnalysis());
+//        }
         healthFormService.saveHelthForm(healthForm);
         return new ResultModel(0,"success",new LinkedHashMap()).put("healthForm",healthForm);
     }

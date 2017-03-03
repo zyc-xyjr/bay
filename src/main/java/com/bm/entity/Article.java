@@ -1,8 +1,6 @@
 package com.bm.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Administrator on 2017/1/17.
@@ -11,7 +9,9 @@ import javax.persistence.Table;
 @Table(name = "tb_article")
 public class Article extends IncrementEntity {
 
-    @Column(name = "json_data")
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT",name = "json_data")
     private String jsonData;
 
     public String getJsonData() {
