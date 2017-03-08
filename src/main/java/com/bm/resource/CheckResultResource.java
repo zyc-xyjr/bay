@@ -104,7 +104,7 @@ public class CheckResultResource {
         StringBuffer items = new StringBuffer();
         Long[] itemArr = new Long[checkResults.size()];
         for (CheckResult checkResult:checkResults){
-            itemArr[checkResults.indexOf(checkResult)] = checkResult.getEntryId();
+
             checkResult.setHealthFormId(healthFormId);
             CheckResult result = checkResultService.getCheckResult(healthFormId,checkResult.getEntryId());
             if (result!=null){
@@ -114,13 +114,15 @@ public class CheckResultResource {
             List<CheckEntryItem> checkEntryItemList = checkEntryItemService.entryItemsByEntryId(checkResult.getEntryId());
             if (checkEntryItemList!=null&&checkEntryItemList.size()>0){
                 for (CheckEntryItem checkEntryItem : checkEntryItemList){
-                    if (checkResult.getCheckValue()<checkEntryItem.getBigValue()&&checkResult.getCheckValue()>checkEntryItem.getSmallValue()){
-                      /*  checkResult.setItemId(checkEntryItem.getId());
-                        checkResultService.saveCheckResult(checkResult);*/
+                    if (checkResult.getCheckValue()<=checkEntryItem.getBigValue()&&checkResult.getCheckValue()>=checkEntryItem.getSmallValue()){
+                        checkResult.setItemId(checkEntryItem.getId());
+                        checkResultService.saveCheckResult(checkResult);
                         s1.append(checkEntryItem.getClinicDepartment());
                         s2.append(checkEntryItem.getLifeGuidance());
                         s3.append(checkEntryItem.getMedicalAdvice());
                         s4.append(checkEntryItem.getAnalysis());
+                        itemArr[checkResults.indexOf(checkResult)] = checkEntryItem.getId();
+                        break;
                     }
                 }
             }
@@ -134,20 +136,18 @@ public class CheckResultResource {
         HealthForm healthForm = healthFormService.getById(healthFormId);
         healthForm.setStatus("processing");
         healthForm.setItems(items.toString());
-        healthForm.setClinicDepartment(s1.toString());
-        healthForm.setLifeGuidance(s2.toString());
-        healthForm.setMedicalAdvice(s3.toString());
-        healthForm.setAnalysis(s4.toString());
-//        HealthForm health = healthFormService.getByItems(items.toString());
-//        if (health==null){
-//
-//        }else {
-//            healthForm.setItems(items.toString());
-//            healthForm.setClinicDepartment(health.getClinicDepartment());
-//            healthForm.setLifeGuidance(health.getLifeGuidance());
-//            healthForm.setMedicalAdvice(health.getMedicalAdvice());
-//            healthForm.setAnalysis(health.getAnalysis());
-//        }
+        HealthForm health = healthFormService.getByItems(items.toString());
+        if (health==null){
+            healthForm.setClinicDepartment(s1.toString());
+            healthForm.setLifeGuidance(s2.toString());
+            healthForm.setMedicalAdvice(s3.toString());
+            healthForm.setAnalysis(s4.toString());
+        }else {
+            healthForm.setClinicDepartment(health.getClinicDepartment());
+            healthForm.setLifeGuidance(health.getLifeGuidance());
+            healthForm.setMedicalAdvice(health.getMedicalAdvice());
+            healthForm.setAnalysis(health.getAnalysis());
+        }
         healthFormService.saveHelthForm(healthForm);
         return new ResultModel(0,"success",new LinkedHashMap()).put("healthForm",healthForm);
     }
