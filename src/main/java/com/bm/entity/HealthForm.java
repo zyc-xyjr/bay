@@ -1,8 +1,6 @@
 package com.bm.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.crypto.Data;
 import java.util.Date;
 
@@ -38,18 +36,27 @@ public class HealthForm extends IncrementEntity {
     private String items;
 
     //异常解析
-    @Column(name = "analysis")
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT",name = "analysis")
     private String analysis;
 
     //医学建议
-    @Column(name = "medical_advice")
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT",name = "medical_advice")
     private String medicalAdvice;
 
     //生活指导
-    @Column(name = "life_guidance")
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT",name = "life_guidance")
     private String lifeGuidance;
 
-    @Column(name = "clinic_department")
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT",name = "clinic_department")
     private String clinicDepartment;
 
     public Long getUserId() {
